@@ -1,18 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { ServiceFunctionService } from './service-function.service';
-
+import { Component, OnInit } from "@angular/core";
+import { ServiceFunctionService } from "./service-function.service";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.scss"]
 })
-export class AppComponent  implements OnInit  {
+export class AppComponent implements OnInit {
   visible = true;
   selectable = true;
   removable = true;
   addOnBlur = true;
 
+  showSpinner = false;
   trainingSuccess = false;
 
   // input fields
@@ -33,18 +33,13 @@ export class AppComponent  implements OnInit  {
 
   stats: any;
 
-
   data: any;
   analyzeText: any;
   trainingLogs: any;
 
-  constructor(
-  private serviceFunctionService: ServiceFunctionService
-  ) {}
+  constructor(private serviceFunctionService: ServiceFunctionService) {}
 
   ngOnInit() {
-
-
     this.gettingTrainingLogs();
     this.gettingCount();
   }
@@ -58,10 +53,12 @@ export class AppComponent  implements OnInit  {
   }
 
   gettingTrainingLogs() {
+    this.showSpinner = true;
     this.serviceFunctionService.gettingTheLogs().subscribe(
       response => {
         console.log("response getting from the training logs", response);
         if (response["success"] === true) {
+          this.showSpinner = false;
           this.trainingLogs = response["logs"];
         }
       },
@@ -98,22 +95,31 @@ export class AppComponent  implements OnInit  {
   }
 
   updateStatus(payload) {
-    console.log('payload sending to the training update api', payload);
+    console.log("payload sending to the training update api", payload);
 
-    this.serviceFunctionService.updatingTheTrainingStatus(payload).subscribe((response) => {
-      console.log('response while getting the data from the training status', response);
-      if(response['success'] === true) {
-        this.gettingTrainingLogs();
-        this.gettingCount();
+    this.serviceFunctionService.updatingTheTrainingStatus(payload).subscribe(
+      response => {
+        console.log(
+          "response while getting the data from the training status",
+          response
+        );
+        if (response["success"] === true) {
+          this.gettingTrainingLogs();
+          this.gettingCount();
+        }
+      },
+      error => {
+        console.log(
+          "error while getting the data from the training status",
+          error
+        );
       }
-    }, (error) => {
-      console.log('error while getting the data from the training status',error);
-    });
-
+    );
   }
 
   submitSentence() {
     console.log("getting the sentence", this.sentence);
+    this.showSpinner = true;
 
     if (this.sentence !== undefined) {
       const payload = {
@@ -129,6 +135,8 @@ export class AppComponent  implements OnInit  {
           if (this.data) {
             // toggling the fields
             this.trainingSuccess = true;
+            this.showSpinner = false;
+
             this.gettingTrainingLogs();
             this.gettingCount();
 
@@ -143,19 +151,20 @@ export class AppComponent  implements OnInit  {
     }
   }
 
-
-
   gettingCount() {
-    this.serviceFunctionService.gettingCountLogs().subscribe((response) => {
-      console.log('response from getting the data of the count', response);
-      if(response['success'] === true) {
-        this.stats = response;
+    this.showSpinner = true;
+    this.serviceFunctionService.gettingCountLogs().subscribe(
+      response => {
+        console.log("response from getting the data of the count", response);
+        if (response["success"] === true) {
+          this.stats = response;
+          this.showSpinner = false;
+        }
+      },
+      error => {
+        console.log("error from getting the data of the count", error);
       }
-
-    }, (error) => {
-      console.log('error from getting the data of the count', error);
-
-    })
+    );
   }
 
   highlight() {
@@ -202,5 +211,3 @@ export class AppComponent  implements OnInit  {
     contentArea.innerHTML = content.join(" ");
   }
 }
-
-
