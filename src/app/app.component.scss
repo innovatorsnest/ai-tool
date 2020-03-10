@@ -1,0 +1,154 @@
+@import "../styles/scss/abstracts/variables";
+
+.card {
+  margin-bottom: 10px;
+}
+
+.train {
+  &__model {
+    margin-top: 5%;
+    margin-bottom: 5%;
+  }
+}
+
+.training-logs {
+  margin-bottom: 10px !important;
+}
+
+.highlight {
+  background-color: #00fefe !important;
+}
+
+.chip-style {
+  padding-right: 5px;
+  background-color: #807308;
+  color: #fff;
+  padding-left: 5px;
+  border-radius: 3px;
+}
+
+.field {
+  padding: 8px;
+  border: 1px solid #80808073;
+  border-radius: 2px;
+  width: 40%;
+}
+
+.analyzeText,
+.sentenceText {
+  width: 100%;
+}
+
+.train--card,
+.logs--card {
+  width: 100%;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.list--item {
+  display: grid;
+}
+
+.stats {
+  height: 100%;
+}
+
+.mat-chip {
+  border-radius: 4px;
+}
+
+// colors
+.danger {
+  color: green;
+}
+
+.success {
+  color: red;
+}
+
+.normal {
+  color: #000;
+}
+
+mat-list.mat--list {
+  padding-bottom: 35px;
+}
+
+mat-card.logs--list {
+  margin: 0px;
+  padding: 0px;
+}
+
+.log--title {
+  color: #808080c7;
+}
+
+.icon__dislike,  .icon__like {
+   cursor: pointer;
+}
+
+
+.selected {
+  background-color: #433a7766 !important;
+}
+
+
+.not-selected {
+  background-color: #fff !important;
+
+}
+
+
+.predict-text-color {
+  color: #000;
+}
+
+.predict--log {
+  padding: 10px;
+  margin: 0px;
+}
+
+.log--title {
+  width: 100%;
+  display: inline-block;
+}
+
+.uncertain--log {
+  background-color: transparent;
+  padding: 10px;
+  margin: 0px;
+  margin-bottom: 10px;
+}
+
+.material-icons {
+  color: #808080c7;
+}
+
+.icon {
+  &__area {
+    display: flex;
+  }
+
+  &__like,
+  &__dislike {
+    width: 50%;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 100%;
+    margin: 5px;
+  }
+
+  &__like {
+    .material-icons {
+      color: #ff0000b8;
+    }
+  }
+
+  &__dislike {
+    .material-icons {
+
+      color: #00800080;
+    }
+  }
+}

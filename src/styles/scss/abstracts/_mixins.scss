@@ -1,0 +1,117 @@
+$padding-slug: padd !default;
+$margin-slug: mar !default;
+$width-slug: width !default;
+
+$top: top !default;
+$right: right !default;
+$bottom: bottom !default;
+$left: left !default;
+
+@for $i from 1 through 200 {
+  .btn-width-#{$i} {
+    width: 1px * $i;
+  }
+}
+
+@for $i from 1 through 200 {
+  .margin-#{$top}-#{$i} {
+    margin-top: 1px * $i;
+  }
+  .margin-#{$right}-#{$i} {
+    margin-right: 1px * $i;
+  }
+  .margin-#{$bottom}-#{$i} {
+    margin-bottom: 1px * $i;
+  }
+  .margin-#{$left}-#{$i} {
+    margin-left: 1px * $i;
+  }
+}
+@for $i from 1 through 200 {
+  .padding-#{$top}-#{$i} {
+    padding-top: 1px * $i;
+  }
+  .padding-#{$right}-#{$i} {
+    padding-right: 1px * $i;
+  }
+  .padding-#{$bottom}-#{$i} {
+    padding-bottom: 1px * $i;
+  }
+  .padding-#{$left}-#{$i} {
+    margin-left: 1px * $i;
+  }
+}
+
+@for $i from 1 through 20 {
+  .padding-#{$i} {
+    padding: 1px * $i;
+  }
+}
+
+@for $i from 1 through 20 {
+  .margin-#{$i} {
+    margin: 1px * $i;
+  }
+}
+
+@mixin set-form-group-width($percentage) {
+  width: $percentage;
+}
+
+
+// === MIXINS ===
+
+@mixin placeholder {
+  color: rgba(0, 0, 0, 0.4);
+  font-size: 16px;
+  line-height: 1.25;
+  padding-left: 5px;
+}
+
+@mixin border-styles(
+  $position: "",
+  $color: rgba(0, 0, 0, 0.1),
+  $style: solid,
+  $width: 1px
+) {
+  border-#{$position}-color: $color;
+  border-#{$position}-style: $style;
+  border-#{$position}-width: $width;
+}
+
+@mixin setPadding($top: "", $bottom: "", $left: "", $right: "", $padding: "") {
+
+
+  @if $padding == 0 {
+    padding: $padding;
+  }
+   @else {
+    padding-top: $top;
+    padding-left: $left;
+    padding-right: $right;
+    padding-bottom: $bottom;
+  }
+}
+
+@mixin setMargin($top: "", $bottom: "", $left: "", $right: "", $margin: "") {
+  @if $margin == 0 {
+    margin: $margin;
+  } @else {
+    margin-top: $top;
+    margin-left: $left;
+    margin-right: $right;
+    margin-bottom: $bottom;
+  }
+}
+
+@mixin fleet-active-inactive-button {
+  border-radius: 4px;
+  cursor: pointer;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 500;
+  vertical-align: center;
+  padding: 6px;
+  border: none;
+}
+

@@ -1,0 +1,28 @@
+//gloabl classes
+.global-divider {
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.1);
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+
+hr.separation-line {
+  display: block;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  width: 100%;
+  border-style: inset;
+  border-width: 0.5px;
+}
+
+hr.divider {
+  display: block;
+  width: 100%;
+  border-style: inset;
+  border-width: 0.5px;
+}
+
+

@@ -1,0 +1,54 @@
+/*-- Color Variables --*/
+
+$navbar-bg: #211645;
+$white: #ffffff;
+$black: #000000;
+$common-bg: #fafafa;
+$textColor: #373a3c;
+$fonts: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans,
+  Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+$border: #e7e7e7;
+$grey: #4a4a4a;
+$blue: #007ee7;
+$light-grey: #b3b3b3;
+$border-clr: #f7f7f7;
+$green: #7ed321;
+$red: #d0021b;
+
+$light-transparent: #8080801f;
+
+%font-normal {
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+}
+
+%flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+$colors: (
+  primary:    #94969b,
+  secondary:  #32db64,
+  danger:     #f53d3d,
+  light:      #f4f4f4,
+  dark:       #222,
+  favorite:   #69BB7B,
+);
+
+$background-color: #fdfdfd;
+// === COLORS ===
+$chip-background-color: rgba(0, 75, 255, 0.2);
+$chip-active-color: #004bff;
+$chip-not-active-color: rgba(0, 0, 0, 0.4);
+$full-screen-color: #ffffff;
+$search-background: rgba(0, 0, 0, 0.02);
+$search-button-color: #ffffff;
+$title-font-size: 16px;
+
+// === STYLES ===
+

@@ -1,0 +1,30 @@
+.chip-active {
+  color: $chip-active-color;
+}
+
+.chip-not-active {
+  color: $chip-not-active-color;
+}
+
+.chip-select {
+  border-radius: 20px;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.chip-pad {
+  @include setPadding($top: 8px, $left: 7px, $bottom: 0px);
+
+  background-color: transparent;
+
+  i.material-icons {
+    padding-left: 10px;
+    font-size: 20px;
+  }
+}
+
+.chip-pad-text {
+  @include setPadding($top: 8px, $left: 10px, $bottom: 8px);
+  // border-radius: 20px;
+  background-color: transparent;
+}
