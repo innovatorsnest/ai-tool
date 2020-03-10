@@ -117,6 +117,11 @@ export class AppComponent implements OnInit {
     );
   }
 
+
+  closePanel() {
+    this.trainingSuccess = false;
+    this.sentence = '';
+  }
   submitSentence() {
     console.log("getting the sentence", this.sentence);
     this.showSpinner = true;
