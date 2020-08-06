@@ -2,62 +2,17 @@ $padding-slug: padd !default;
 $margin-slug: mar !default;
 $width-slug: width !default;
 
+
+$base-size: 16;
+
 $top: top !default;
 $right: right !default;
 $bottom: bottom !default;
 $left: left !default;
 
-@for $i from 1 through 200 {
-  .btn-width-#{$i} {
-    width: 1px * $i;
-  }
-}
-
-@for $i from 1 through 200 {
-  .margin-#{$top}-#{$i} {
-    margin-top: 1px * $i;
-  }
-  .margin-#{$right}-#{$i} {
-    margin-right: 1px * $i;
-  }
-  .margin-#{$bottom}-#{$i} {
-    margin-bottom: 1px * $i;
-  }
-  .margin-#{$left}-#{$i} {
-    margin-left: 1px * $i;
-  }
-}
-@for $i from 1 through 200 {
-  .padding-#{$top}-#{$i} {
-    padding-top: 1px * $i;
-  }
-  .padding-#{$right}-#{$i} {
-    padding-right: 1px * $i;
-  }
-  .padding-#{$bottom}-#{$i} {
-    padding-bottom: 1px * $i;
-  }
-  .padding-#{$left}-#{$i} {
-    margin-left: 1px * $i;
-  }
-}
-
-@for $i from 1 through 20 {
-  .padding-#{$i} {
-    padding: 1px * $i;
-  }
-}
-
-@for $i from 1 through 20 {
-  .margin-#{$i} {
-    margin: 1px * $i;
-  }
-}
-
 @mixin set-form-group-width($percentage) {
   width: $percentage;
 }
-
 
 // === MIXINS ===
 
@@ -68,40 +23,41 @@ $left: left !default;
   padding-left: 5px;
 }
 
-@mixin border-styles(
-  $position: "",
-  $color: rgba(0, 0, 0, 0.1),
-  $style: solid,
-  $width: 1px
-) {
+
+//Function to convert px value into rem
+//You can replace rem with any other value you want (rem is most preferred value for web)
+@function size($target, $context: $base-size) {
+  @return ($target / $context) * 1em;
+}
+
+
+@mixin border-styles($position: "", $color: rgba(0, 0, 0, 0.1), $style: solid, $width: 1px) {
   border-#{$position}-color: $color;
   border-#{$position}-style: $style;
   border-#{$position}-width: $width;
 }
 
-@mixin setPadding($top: "", $bottom: "", $left: "", $right: "", $padding: "") {
-
-
-  @if $padding == 0 {
-    padding: $padding;
-  }
-   @else {
-    padding-top: $top;
-    padding-left: $left;
-    padding-right: $right;
-    padding-bottom: $bottom;
+@mixin setPadding($top: "", $bottom: "", $left: "", $right: "", $padding: 0) {
+  @if ($padding != 0) {
+    padding-top: size($top);
+    padding-left: size($left);
+    padding-right: size($right);
+    padding-bottom: size($bottom);
+  } @else {
+    padding: size($padding);
   }
 }
 
-@mixin setMargin($top: "", $bottom: "", $left: "", $right: "", $margin: "") {
-  @if $margin == 0 {
-    margin: $margin;
+@mixin setMargin($top: "", $bottom: "", $left: "", $right: "", $margin: 0) {
+  @if ($margin != 0) {
+    margin-top:  size($top);
+    margin-left: size($left);
+    margin-right: size($right);
+    margin-bottom: size($bottom);
   } @else {
-    margin-top: $top;
-    margin-left: $left;
-    margin-right: $right;
-    margin-bottom: $bottom;
+    margin: size($margin)
   }
+
 }
 
 @mixin fleet-active-inactive-button {
@@ -114,4 +70,3 @@ $left: left !default;
   padding: 6px;
   border: none;
 }
-

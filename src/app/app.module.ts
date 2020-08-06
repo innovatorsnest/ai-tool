@@ -1,4 +1,5 @@
-import { MaterialModule } from './modules/material.module';
+import { ToolModule } from './modules/tool/tool.module';
+import {MaterialModule} from './shared/material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -7,11 +8,13 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ToolComponent } from './modules/tool/tool.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ToolComponent
   ],
   imports: [
     BrowserModule,
@@ -19,7 +22,8 @@ import { HttpClientModule } from '@angular/common/http';
     MaterialModule,
     BrowserAnimationsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ToolModule
   ],
   providers: [],
   bootstrap: [AppComponent]

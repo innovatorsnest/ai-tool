@@ -15,6 +15,9 @@ $border-clr: #f7f7f7;
 $green: #7ed321;
 $red: #d0021b;
 
+$background: #34314D;
+
+
 $light-transparent: #8080801f;
 
 %font-normal {
@@ -40,7 +43,7 @@ $colors: (
   favorite:   #69BB7B,
 );
 
-$background-color: #fdfdfd;
+$background-color:$background;
 // === COLORS ===
 $chip-background-color: rgba(0, 75, 255, 0.2);
 $chip-active-color: #004bff;

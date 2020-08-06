@@ -1,9 +1,22 @@
 <div class="container-fluid">
-    <div class="spinner"  *ngIf="showSpinner === true" >
-        <div class="double-bounce1"></div>
-        <div class="double-bounce2"></div>
-    </div>
-  <div class="row train__model">
+  <!-- <div class="spinner" *ngIf="showSpinner === true">
+    <div class="double-bounce1"></div>
+    <div class="double-bounce2"></div>
+  </div> -->
+
+  <app-tool></app-tool>
+
+
+</div>
+
+
+
+
+
+
+
+<!--
+    <div class="row train__model">
     <div class="col-md-8">
       <div class="row train__card">
         <mat-card class="card train--card">
@@ -19,20 +32,13 @@
               />
             </mat-list-item>
 
-            <!-- <button class="button" (click)="highlight()">Button</button>
 
-            <div id="highlight-content">
-              {{content}}
-            </div> -->
-
-            <!-- *ngIf="trainingSuccess === true" -->
             <span *ngIf="trainingSuccess === true">
               <mat-list-item role="listitem" class="list--item">
                 <mat-label class="margin-top-10 margin-bottom-10"
                   >ANALYZE</mat-label
                 >
 
-                <!-- <input type="text" [(ngModel)]="analyzeText"  [innerHTML]="highlight()" class="global-input-section" /> -->
                 <div
                   class="field analyzeText"
                   id="highlight-content"
@@ -60,23 +66,6 @@
               </mat-list-item>
               <mat-list-item role="listitem" class="entity--item">
                 <mat-label>INTENT : PREDICT</mat-label>
-
-                <!-- <mat-chip-list
-                  #chipList
-                  aria-label="Fruit selection"
-                  class="margin-left-10 margin-right-10"
-                >
-                  <mat-chip
-                    *ngFor="let intent of data?.intentData"
-                    [removable]="removable"
-                    (removed)="remove(intent)"
-                    selected
-                    color="primary"
-                  >
-                    {{ intent.intent }}
-                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-                  </mat-chip>
-                </mat-chip-list> -->
               </mat-list-item>
 
               <mat-list-item role="listitem" class="list--item">
@@ -180,31 +169,6 @@
           </mat-list>
           <mat-list class="margin-top-20">
             <mat-card class="logs--list">
-              <!-- <div class="row full--expand margin-10 predict--log">
-                <div class="col-md-1 align-self-center">
-                  <i class="material-icons">
-                    message
-                  </i>
-                </div>
-
-                <div class="col-md-6">
-                  <span>
-                    What are the growth opportunities for Asian water utilities
-                  </span>
-                </div>
-
-                <div class="col-md-4">
-                  <span class="predict-text-color">
-                    intent Predict
-                  </span>
-                </div>
-
-                <div class="col-md-1">
-                  <i class="material-icons">
-                    edit
-                  </i>
-                </div>
-              </div> -->
 
               <div
                 class="row full--expand margin-10 margin-bottom-5 uncertain--log"
@@ -322,47 +286,9 @@
               </mat-list>
             </mat-list-item>
             <hr class="divider" />
-            <!-- <mat-list-item role="listitem" role="listitem" class="list--item">
-              <mat-label class="stats-title">INTENTS</mat-label>
-              <mat-list role="list" class="mat--list">
-                <mat-list-item role="listitem">
-                  <div
-                    class="row list-item-row full--expand"
-                    *ngFor="let stat of stats.intents"
-                  >
-                    <div class="col-md-10">
-                      <span>{{ stat.name }}</span>
-                    </div>
-                    <div class="col-md-2">
-                      <span class="{{ stat.color }}">{{ stat.count }}</span>
-                    </div>
-                  </div>
-                </mat-list-item>
-              </mat-list>
-            </mat-list-item>
-            <hr class="divider" />
-
-            <mat-list-item role="listitem" role="listitem" class="list--item">
-              <mat-label class="stats-title">ENTITIES</mat-label>
-              <mat-list role="list">
-                <mat-list-item role="listitem">
-                  <div
-                    class="row list-item-row full--expand"
-                    *ngFor="let stat of stats.entities"
-                  >
-                    <div class="col-md-10">
-                      <span>{{ stat.name }}</span>
-                    </div>
-                    <div class="col-md-2">
-                      <span class="{{ stat.color }}">{{ stat.count }}</span>
-                    </div>
-                  </div>
-                </mat-list-item>
-              </mat-list>
-            </mat-list-item> -->
           </mat-list>
         </mat-card>
       </div>
     </div>
   </div>
-</div>
+ -->

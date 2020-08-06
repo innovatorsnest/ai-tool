@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="test__header">
+
+  </div>
+
+  <div class="application__train-model-stats flex flex-column">
+    <div class="train__model--container">
+      <h1 class="train__model--header">
+        Train the model
+      </h1>
+      <nav class="navbar navbar-light bg-light">
+        <form class="form-inline">
+          <input class="form-control text__sentence"  [ngModelOptions]="{standalone: true}" [(ngModel)]="sentence" type="search" placeholder="Try a sentence"
+            aria-label="Search">
+
+          <span class="button">
+
+            <button class="btn btn-lg btn__secondary analyze__button"
+              [ngClass]="sentence.length > 0 ? 'btn__enable': 'btn__disabled'" type="submit" (click)="analyzeSentence()">Analyze</button>
+          </span>
+        </form>
+      </nav>
+
+      <!-- Analyze panel -->
+      <div class="train__model">
+        <div class="train__model-analyze">
+          <h2 class="analyze__title p-l-20">Analyze</h2>
+          <div class="input--field">
+            <input class="form-control text__sentence fixed"  [ngModelOptions]="{standalone: true}" [(ngModel)]="sentence" type="search" placeholder="Try a sentence"
+            aria-label="Search">
+          </div>
+
+        </div>
+        <div class="choose__intent">
+          <label class="choose__intent-label">Intent</label>
+          <div class="choose__intent-dropdown">
+            <select class="form-control" id="sel1">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+            </select>
+          </div>
+        </div>
+        <div class="clearfix">
+          <button type="button" class="btn btn-brand btn-brand-md btn-secondary pull-right submit__button" > Submit </button>
+        </div>
+      </div>
+
+    </div>
+
+
+
+    <div class="stats">
+      <app-stats></app-stats>
+    </div>
+
+  </div>
+</div>
