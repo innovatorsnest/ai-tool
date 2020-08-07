@@ -22,11 +22,11 @@
       </nav>
 
       <!-- Analyze panel -->
-      <div class="train__model">
+      <div class="train__model"  *ngIf="showAnalysModal === true">
         <div class="train__model-analyze">
           <h2 class="analyze__title p-l-20">Analyze</h2>
           <div class="input--field">
-            <input class="form-control text__sentence fixed"  [ngModelOptions]="{standalone: true}" [(ngModel)]="sentence" type="search" placeholder="Try a sentence"
+            <input class="form-control text__sentence fixed"  disabled [ngModelOptions]="{standalone: true}" [(ngModel)]="sentence" type="search" placeholder="Try a sentence"
             aria-label="Search">
           </div>
 
@@ -35,10 +35,7 @@
           <label class="choose__intent-label">Intent</label>
           <div class="choose__intent-dropdown">
             <select class="form-control" id="sel1">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
+              <option *ngFor="let intent of sentenceData['intentData']">{{intent.intent}}</option>
             </select>
           </div>
         </div>
@@ -52,8 +49,13 @@
 
 
     <div class="stats">
-      <app-stats></app-stats>
+      <app-stats  (logsValue)="logs($event)"></app-stats>
     </div>
+
+    <div class="logs">
+      <app-logs *ngIf="showLogs"></app-logs>
+    </div>
+
 
   </div>
 </div>

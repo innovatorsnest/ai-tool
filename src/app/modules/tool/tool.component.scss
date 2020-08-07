@@ -34,6 +34,7 @@
   z-index: 10;
   position: relative;
   width: 100%;
+  cursor: auto;
 }
 
 .fixed {
@@ -116,12 +117,25 @@
   border-left-width: 0px;
 }
 
-
-
-.submit__button{
+.submit__button {
   width: 130px;
   padding: 10px;
   color: #fff;
   background-color: #59a401;
   border-color: #549a01;
- }
+}
+
+.stats {
+  padding-left: 150px;
+  padding-right: 150px;
+}
+
+.logs {
+  display: block;
+  padding: 2rem;
+  padding-left: 150px;
+  padding-right: 150px;
+
+  position: relative;
+  top: -40px;
+}

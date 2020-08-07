@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-stats',
@@ -7,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StatsComponent implements OnInit {
 
+
+  isShow : boolean;
+  @Output() logsValue = new EventEmitter();
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+
+
+  showLogs() {
+    this.isShow = !this.isShow;
+    this.logsValue.emit(this.isShow);
   }
 
 }
