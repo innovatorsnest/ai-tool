@@ -1,6 +1,7 @@
 import { ToolService } from '../../services/tool.service';
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-tool',
   templateUrl: './tool.component.html',
@@ -13,12 +14,24 @@ export class ToolComponent implements OnInit {
   showAnalysModal: boolean = false;
   showLogs: boolean;
   sentenceData: Response;
+  getEntities: any;
 
   constructor(
     private dataService: ToolService
   ) { }
 
   ngOnInit() {
+    this.getAllEntities();
+  }
+
+  getAllEntities() {
+    this.dataService.gettingAllEntity().subscribe((response) => {
+      this.getEntities = response["data"];
+    }, (error) => {
+        if(error) {
+          console.log('error inside the getting Entity', error);
+        }
+    })
   }
 
   logs(value) {

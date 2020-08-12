@@ -41,15 +41,15 @@ export class ToolService {
     )
   }
 
-  // gettingTheLogs() {
-  //   return this._http.get(this.nlpUrl + '/nlpapi/conversation/logs',this.httpOptions)
-  //   .pipe(
-  //     map((res: Response) => {
-  //       console.log('response from service', res);
-  //       return res;
-  //     })
-  //   )
-  // }
+  gettingAllEntity() {
+    return this._http.get(this.nlpUrl + '/nlpapi/entity/all',this.httpOptions)
+    .pipe(
+      map((res: Response) => {
+        console.log('response fr  om getting ', res);
+        return res;
+      })
+    )
+  }
 
   // updatingTheTrainingStatus(payload) {
   //   return this._http.put(this.nlpUrl + '/nlpapi/conversation/logsupdate', payload,this.httpOptions)

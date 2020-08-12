@@ -35,7 +35,7 @@
           <label class="choose__intent-label">Intent</label>
           <div class="choose__intent-dropdown">
             <select class="form-control" id="sel1">
-              <option *ngFor="let intent of sentenceData['intentData']">{{intent.intent}}</option>
+              <option *ngFor="let intent of sentenceData['intentData']">{{intent.confidence_score.toPrecision(4)}}%:{{intent.intent}}</option>
             </select>
           </div>
         </div>

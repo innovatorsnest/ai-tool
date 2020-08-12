@@ -11,10 +11,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToolComponent } from './modules/tool/tool.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
-    ToolComponent
+    ToolComponent,
   ],
   imports: [
     BrowserModule,
