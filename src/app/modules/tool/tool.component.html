@@ -10,37 +10,44 @@
       </h1>
       <nav class="navbar navbar-light bg-light">
         <form class="form-inline">
-          <input class="form-control text__sentence"  [ngModelOptions]="{standalone: true}" [(ngModel)]="sentence" type="search" placeholder="Try a sentence"
-            aria-label="Search">
+          <input class="form-control text__sentence" [ngModelOptions]="{standalone: true}" [(ngModel)]="sentence"
+            type="search" placeholder="Try a sentence" aria-label="Search">
 
           <span class="button">
 
             <button class="btn btn-lg btn__secondary analyze__button"
-              [ngClass]="sentence.length > 0 ? 'btn__enable': 'btn__disabled'" type="submit" (click)="analyzeSentence()">Analyze</button>
+              [ngClass]="sentence.length > 0 ? 'btn__enable': 'btn__disabled'" type="submit"
+              (click)="analyzeSentence()">Analyze</button>
           </span>
         </form>
       </nav>
 
       <!-- Analyze panel -->
-      <div class="train__model"  *ngIf="showAnalysModal === true">
+      <div class="train__model" *ngIf="showAnalysModal === true">
         <div class="train__model-analyze">
           <h2 class="analyze__title p-l-20">Analyze</h2>
           <div class="input--field">
-            <input class="form-control text__sentence fixed"  disabled [ngModelOptions]="{standalone: true}" [(ngModel)]="sentence" type="search" placeholder="Try a sentence"
-            aria-label="Search">
+            <div class="form-control text__sentence" (dblclick)="mapEntity($event)" aria-label="Search">
+              {{sentenceText}}
+            </div>
           </div>
 
         </div>
+
+
+
         <div class="choose__intent">
           <label class="choose__intent-label">Intent</label>
           <div class="choose__intent-dropdown">
-            <select class="form-control" id="sel1">
-              <option *ngFor="let intent of sentenceData['intentData']">{{intent.confidence_score.toPrecision(4)}}%:{{intent.intent}}</option>
+            <select class="form-control" id="sel1" #selectedIntent>
+              <option *ngFor="let intent of sentenceData['intentData']">
+                {{intent.confidence_score.toPrecision(4)}}%:{{intent.intent}}</option>
             </select>
           </div>
         </div>
         <div class="clearfix">
-          <button type="button" class="btn btn-brand btn-brand-md btn-secondary pull-right submit__button" > Submit </button>
+          <button type="button" class="btn btn-brand btn-brand-md btn-secondary pull-right submit__button"
+            (click)="subSentence(selectedIntent.value)"> Submit </button>
         </div>
       </div>
 
@@ -49,7 +56,7 @@
 
 
     <div class="stats">
-      <app-stats  (logsValue)="logs($event)"></app-stats>
+      <app-stats (logsValue)="logs($event)"></app-stats>
     </div>
 
     <div class="logs">

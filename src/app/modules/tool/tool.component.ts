@@ -1,5 +1,7 @@
+import { ObservablesService } from './../../services/observable.service';
 import { ToolService } from '../../services/tool.service';
 import { Component, OnInit } from '@angular/core';
+
 
 
 @Component({
@@ -12,25 +14,32 @@ export class ToolComponent implements OnInit {
   sentence: string = '';
 
   showAnalysModal: boolean = false;
-  showLogs: boolean;
+  showLogs = false;
   sentenceData: Response;
   getEntities: any;
 
+  sentenceText: string;
+
   constructor(
-    private dataService: ToolService
+    private dataService: ToolService,
+    private observableService: ObservablesService,
   ) { }
 
   ngOnInit() {
-    this.getAllEntities();
+
   }
 
   getAllEntities() {
+
+    this.observableService.updateSpinnerStatus(true);
     this.dataService.gettingAllEntity().subscribe((response) => {
       this.getEntities = response["data"];
+      this.observableService.updateSpinnerStatus(false);
+
     }, (error) => {
-        if(error) {
-          console.log('error inside the getting Entity', error);
-        }
+      if (error) {
+        console.log('error inside the getting Entity', error);
+      }
     })
   }
 
@@ -43,6 +52,8 @@ export class ToolComponent implements OnInit {
   analyzeSentence() {
     console.log("getting the sentence", this.sentence);
 
+    this.observableService.updateSpinnerStatus(true);
+
     if (this.sentence !== undefined) {
       const payload = {
         query: this.sentence,
@@ -54,7 +65,8 @@ export class ToolComponent implements OnInit {
           console.log("response from getting the data from the nlu", response);
 
           this.sentenceData = response;
-
+          this.sentenceText = this.sentence;
+          this.observableService.updateSpinnerStatus(false);
           this.showAnalysModal = true;
         },
         error => {
@@ -63,4 +75,32 @@ export class ToolComponent implements OnInit {
       );
     }
   }
+
+  mapEntity(event) {
+    console.log('event', event);
+  }
+
+
+  subSentence(intent) {
+    //   const payload =
+    // {
+    //     _id: ,
+    //     "updates: {
+    //       "intent": "master off",
+    //       "entities": [
+    //         {
+    //           "name": "light",
+    //           "color": "#807308",
+    //           "start": 0,
+    //           "value": "Master",
+    //           "end": 6
+    //         }
+    //       ],
+    //       "good": false,
+    //       "bad": true,
+    //       "annotated": true,
+    //       "non_annotated": false
+    //     }
+  }
+
 }

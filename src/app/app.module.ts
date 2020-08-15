@@ -1,3 +1,4 @@
+import { ObservablesService } from './services/observable.service';
 import { ToolModule } from './modules/tool/tool.module';
 import {MaterialModule} from './shared/material.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -26,7 +27,7 @@ import { ToolComponent } from './modules/tool/tool.component';
     HttpClientModule,
     ToolModule
   ],
-  providers: [],
+  providers: [ObservablesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

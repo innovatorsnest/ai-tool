@@ -1,3 +1,4 @@
+import { ObservablesService } from './services/observable.service';
 import { Component, OnInit } from "@angular/core";
 import { ServiceFunctionService } from "./service-function.service";
 
@@ -37,11 +38,19 @@ export class AppComponent implements OnInit {
   analyzeText: any;
   trainingLogs: any;
 
-  constructor(private serviceFunctionService: ServiceFunctionService) {}
+  constructor(
+    private serviceFunctionService: ServiceFunctionService,
+    private observablesService: ObservablesService
+    ) {}
 
   ngOnInit() {
     this.gettingTrainingLogs();
     this.gettingCount();
+
+    this.observablesService.spinnerStatusObservable.subscribe((status) => {
+      console.log("spinner status", status);
+      this.showSpinner = status;
+    });
   }
 
   remove(item): void {

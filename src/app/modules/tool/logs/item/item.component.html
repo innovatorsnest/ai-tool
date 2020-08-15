@@ -1,56 +1,59 @@
-<div class="log__container">
-  <span class="log__acceptance log__acceptance-border-radius" [ngClass]="{
-   'log__acceptance--is_correct': isThumsup === 'up',
-   'log__acceptance--is_wrong': isThumsup === 'down'
-  }"></span>
-  <div class="row">
-    <div class="col-md-1 message__icon">
-      <i class="fa fa-commenting" aria-hidden="true"></i>
+<ng-container *ngFor="let log of logs">
+
+  <div class="log__container">
+    <span class="log__acceptance log__acceptance-border-radius" [ngClass]="{
+     'log__acceptance--is_correct': isThumsup === 'up',
+     'log__acceptance--is_wrong': isThumsup === 'down'
+    }"></span>
+    <div class="row">
+      <div class="col-md-1 message__icon">
+        <i class="fa fa-commenting" aria-hidden="true"></i>
+      </div>
+      <div class="col-md-6 message__sentence">
+        {{log.sentence}}
+      </div>
+      <div class="col-md-3 message__intent">
+        <li class="message__text-hightlight"> Intent:</li>
+        <li>
+          weather.today_forecast
+        </li>
+      </div>
+      <div class="col-md-2 message__icons">
+        <i class="fa fa-pencil message__text-hightlight" aria-hidden="true"></i>
+      </div>
     </div>
-    <div class="col-md-6 message__sentence">
-      what is today's weather
+    <div class="row second__row">
+      <div class="col-md-1  message__icon">
+        <i class="fa fa-commenting" aria-hidden="true"></i>
+      </div>
+      <div class="col-md-6 message__sentence">
+
+        <li class="message__text-hightlight">
+          identified as:
+        </li>
+
+        <li>
+             {{log.sentence}}
+        </li>
+      </div>
+
+      <div class="col-md-3 message__icons">
+        <li class="message__text-hightlight">identified as:</li>
+        <li>
+          weather.today_forecast
+        </li>
+      </div>
+
+      <div class="col-md-2 message__icons">
+        <button class="btn thumbs__button btn__green" (click)="makeSuggestion('up', log)">
+          <i class="fa fa-thumbs-o-up"></i>
+        </button>
+        <button class="btn thumbs__button btn__red" (click)="makeSuggestion('down', log)">
+          <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+        </button>
+      </div>
+
     </div>
-    <div class="col-md-3 message__intent">
-      <li class="message__text-hightlight"> Intent:</li>
-      <li>
-        weather.today_forecast
-      </li>
-    </div>
-    <div class="col-md-2 message__icons">
-      <i class="fa fa-pencil message__text-hightlight" aria-hidden="true"></i>
-    </div>
+
   </div>
-  <div class="row second__row">
-    <div class="col-md-1  message__icon">
-      <i class="fa fa-commenting" aria-hidden="true"></i>
-    </div>
-    <div class="col-md-6 message__sentence">
-
-      <li class="message__text-hightlight">
-        identified as:
-      </li>
-
-      <li>
-        what is today's weather
-      </li>
-    </div>
-
-    <div class="col-md-3 message__icons">
-      <li class="message__text-hightlight">identified as:</li>
-      <li>
-        weather.today_forecast
-      </li>
-    </div>
-
-    <div class="col-md-2 message__icons">
-      <button class="btn thumbs__button btn__green" (click)="makeSuggestion('up')">
-        <i class="fa fa-thumbs-o-up"></i>
-      </button>
-      <button class="btn thumbs__button btn__red"  (click)="makeSuggestion('down')">
-        <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
-      </button>
-    </div>
-
-  </div>
-
-</div>
+</ng-container>

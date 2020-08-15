@@ -13,7 +13,7 @@ export class ToolService {
 
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type':  'application/json',
+      'Content-Type': 'application/json',
       'Authorization': '49'
     })
   };
@@ -32,23 +32,43 @@ export class ToolService {
   gettingDataFromNlu(payload) {
 
     return this._http.post(this.nlpUrl + '/nlpapi/conversation/predict', payload, this.httpOptions)
-    .pipe(
-      map((res: Response) => {
+      .pipe(
+        map((res: Response) => {
 
-        console.log('response from service', res);
-        return res;
-      })
-    )
+          console.log('response from service', res);
+          return res;
+        })
+      )
   }
 
   gettingAllEntity() {
-    return this._http.get(this.nlpUrl + '/nlpapi/entity/all',this.httpOptions)
-    .pipe(
-      map((res: Response) => {
-        console.log('response fr  om getting ', res);
-        return res;
-      })
-    )
+    return this._http.get(this.nlpUrl + '/nlpapi/entity/all', this.httpOptions)
+      .pipe(
+        map((res: Response) => {
+          console.log('response fr  om getting ', res);
+          return res;
+        })
+      )
+  }
+  logsUpdate(payload) {
+    return this._http.put(this.nlpUrl + '/nlpapi/conversation/logsupdate', payload)
+      .pipe(
+        map((res: Response) => {
+          console.log('response from getting the logs update', res);
+          return res;
+        })
+      )
+  }
+
+  allConversationLogs() {
+    return this._http.get(this.nlpUrl + '/nlpapi/conversation/logs?intent='+ ''
+    + '&entity=' + '' + '&metric=' + '' + '&logType=', this.httpOptions)
+      .pipe(
+        map((res: Response) => {
+          console.log('response from getting the all conversation logs', res);
+          return res;
+        })
+      )
   }
 
   // updatingTheTrainingStatus(payload) {
