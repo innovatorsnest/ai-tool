@@ -43,4 +43,9 @@ export class LogsComponent implements OnInit {
     })
   }
 
+
+  refreshLogs(event) {
+   console.log('event', event);
+  }
+
 }

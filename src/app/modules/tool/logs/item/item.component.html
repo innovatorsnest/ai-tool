@@ -1,9 +1,10 @@
 <ng-container *ngFor="let log of logs">
 
   <div class="log__container">
+
     <span class="log__acceptance log__acceptance-border-radius" [ngClass]="{
-     'log__acceptance--is_correct': isThumsup === 'up',
-     'log__acceptance--is_wrong': isThumsup === 'down'
+     'log__acceptance--is_correct': log?.good === true,
+     'log__acceptance--is_wrong': log?.bad === true
     }"></span>
     <div class="row">
       <div class="col-md-1 message__icon">

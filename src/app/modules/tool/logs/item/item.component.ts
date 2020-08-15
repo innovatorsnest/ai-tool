@@ -1,4 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { ObservablesService } from './../../../../services/observable.service';
+import { ToolService } from './../../../../services/tool.service';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import tippy from 'tippy.js';
 
 @Component({
@@ -10,9 +12,18 @@ export class ItemComponent implements OnInit {
 
   isThumsup = '';
 
+
+
+
+
   @Input() logs;
 
-  constructor() { }
+  @Output() refreshLogsStatus = new EventEmitter();
+
+  constructor(
+    private dataService: ToolService,
+    private observableService: ObservablesService,
+  ) { }
 
   ngOnInit() {
   }
@@ -20,21 +31,34 @@ export class ItemComponent implements OnInit {
   makeSuggestion(suggestion, log) {
     console.log('suggestion here', suggestion)
     console.log('log', log)
-    // this.isThumsup = suggestion;
 
     const payload = {
-
-      _id: "5f37aef1737dba243a739104",
+      _id: log._id.$oid,
       updates: {
-        intent: "master off",
-        entities: log ,
-      good: true,
-      bad: false,
-      annotated: true,
-      non_annotated: false
+        intent: log.intent,
+        entities: log.entities,
+        good: suggestion === 'up' ? true : false,
+        bad: suggestion === 'down' ? true: false,
+        annotated: true,
+        non_annotated: false
+      }
     }
 
+    this.logsUpdate(payload);
   }
-}
+
+
+  logsUpdate(payload) {
+    this.dataService.logsUpdate(payload).subscribe((response) => {
+      console.log('response while submitting the sentence', response);
+      if (response["success"] === true) {
+        this.observableService.updateSpinnerStatus(false);
+        this.observableService.displaySnackbar("Successfully Submitted Sentence");
+        this.refreshLogsStatus.emit(true);
+      }
+    }, error => {
+      console.log('error while updating sentence ', error);
+    })
+  }
 
 }

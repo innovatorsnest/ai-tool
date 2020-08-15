@@ -41,7 +41,9 @@ export class AppComponent implements OnInit {
   constructor(
     private serviceFunctionService: ServiceFunctionService,
     private observablesService: ObservablesService
-    ) {}
+    ) {
+
+    }
 
   ngOnInit() {
     this.gettingTrainingLogs();
@@ -51,6 +53,8 @@ export class AppComponent implements OnInit {
       console.log("spinner status", status);
       this.showSpinner = status;
     });
+
+
   }
 
   remove(item): void {

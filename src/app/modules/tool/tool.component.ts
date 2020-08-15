@@ -63,7 +63,6 @@ export class ToolComponent implements OnInit {
       this.dataService.gettingDataFromNlu(payload).subscribe(
         response => {
           console.log("response from getting the data from the nlu", response);
-
           this.sentenceData = response;
           this.sentenceText = this.sentence;
           this.observableService.updateSpinnerStatus(false);
@@ -82,25 +81,49 @@ export class ToolComponent implements OnInit {
 
 
   subSentence(intent) {
-    //   const payload =
-    // {
-    //     _id: ,
-    //     "updates: {
-    //       "intent": "master off",
-    //       "entities": [
-    //         {
-    //           "name": "light",
-    //           "color": "#807308",
-    //           "start": 0,
-    //           "value": "Master",
-    //           "end": 6
-    //         }
-    //       ],
-    //       "good": false,
-    //       "bad": true,
-    //       "annotated": true,
-    //       "non_annotated": false
-    //     }
+    console.log('intent', intent);
+    console.log('intent split', intent.split(':')[1]);
+    const payload =
+    {
+      _id: this.sentenceData["id"],
+      updates: {
+        intent: intent.split(':')[1],
+        entities:
+          [
+            // {
+            //   name: "light",
+            //   color: "#807308",
+            //   start: 0,
+            //   value: "Master",
+            //   end: 6
+            // }
+          ]
+      },
+      good: false,
+      bad: false,
+      annotated: false,
+      non_annotated: true
+    }
+
+    console.log('payload', payload)
+
+    this.submitSentenceApi(payload);
+  }
+
+
+  submitSentenceApi(payload) {
+    this.observableService.updateSpinnerStatus(true);
+    this.dataService.logsUpdate(payload).subscribe((response) => {
+      console.log('response while submitting the sentence', response);
+      if (response["success"] === true) {
+        this.observableService.updateSpinnerStatus(false);
+        this.observableService.displaySnackbar("Successfully Submitted Sentence");
+
+        this.showAnalysModal = false;
+      }
+    }, error => {
+      console.log('error while updating sentence ', error);
+    })
   }
 
 }

@@ -19,4 +19,15 @@ export class ObservablesService {
   }
 
 
+
+  displaySnackbar(message) {
+    $("#snackbar").addClass("show");
+    $("#snackbar").html(message);
+    setTimeout(() => {
+      $("#snackbar").removeClass("show");
+    }, 3000);
+  }
+
+
+
 }

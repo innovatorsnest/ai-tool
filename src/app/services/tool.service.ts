@@ -51,7 +51,7 @@ export class ToolService {
       )
   }
   logsUpdate(payload) {
-    return this._http.put(this.nlpUrl + '/nlpapi/conversation/logsupdate', payload)
+    return this._http.put(this.nlpUrl + '/nlpapi/conversation/logsupdate', payload,  this.httpOptions)
       .pipe(
         map((res: Response) => {
           console.log('response from getting the logs update', res);
