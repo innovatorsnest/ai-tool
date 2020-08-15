@@ -1,0 +1,138 @@
+// train model
+.train__model {
+  border: 1px solid #1e1a2c;
+  border-radius: 0.5rem;
+}
+
+.train__model-analyze {
+  border-bottom: 1px solid #1e1a2c;
+}
+
+.analyze__title {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #fdfdfd;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-weight: normal;
+}
+
+.choose__intent {
+  display: flex;
+  padding: 20px;
+}
+
+.choose__intent-label {
+  padding-right: 1rem;
+  font-weight: 700;
+  margin: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #fdfdfd;
+  font-weight: normal;
+}
+
+.choose__intent-dropdown {
+  text-align: left;
+  width: 170px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 12px;
+  font-size: 0.75rem;
+}
+
+.text__sentence {
+  height: 3.5rem;
+  font-size: 1.3rem;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 20px 0 rgba(40, 43, 55, 0.2);
+  z-index: 10;
+  position: relative;
+  width: 100%;
+  cursor: auto;
+}
+
+.input--field {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.clearfix {
+  border: 1px solid #1e1a2c;
+  border-radius: 0.5rem;
+  border-bottom-width: 0px;
+  border-left-width: 0px;
+}
+
+.submit__button,
+.edit__cancel--button {
+  width: 130px;
+  padding: 10px;
+  color: #fff;
+  background-color: #59a401;
+  border-color: #549a01;
+}
+
+.message {
+  &__icon {
+    padding: 15px;
+    text-align: center;
+  }
+
+  &__sentence {
+    padding: 15px;
+  }
+
+  &__text-hightlight {
+    color: #b6babf;
+  }
+
+  &__intent {
+    padding: 15px;
+  }
+
+  &__icons {
+    padding: 15px;
+  }
+}
+
+.edit {
+  &__input--field {
+    padding-left: 0px;
+  }
+  &__intent-label {
+    color: #000;
+  }
+
+  &__intent {
+    padding: 5px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  &__model {
+    border: 0;
+    border-radius: 0;
+  }
+
+  &__clearfix {
+    border-radius: 0px;
+    border-right-style: hidden;
+    padding: 10px;
+    border-top-color: rgba(0, 0, 0, 0.2);
+  }
+
+  &__cancel--button {
+    color: #000;
+    background-color: transparent;
+    border-color: #e0e0e0;
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+
+  &__sentence {
+    font-weight: 700;
+  }
+}

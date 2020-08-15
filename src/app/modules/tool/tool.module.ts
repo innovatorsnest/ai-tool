@@ -5,16 +5,17 @@ import { StatsComponent } from './stats/stats.component';
 import { LogsComponent } from './logs/logs.component';
 import { MaterialModule } from 'src/app/shared/material.module';
 import { ItemComponent } from './logs/item/item.component';
+import { AnalyzeComponent } from './analyze/analyze.component';
 
 
 
 @NgModule({
-  declarations: [StatsComponent, LogsComponent, ItemComponent],
+  declarations: [StatsComponent, LogsComponent, ItemComponent, AnalyzeComponent],
   imports: [
     CommonModule,
     MaterialModule
   ],
-  exports: [StatsComponent,LogsComponent, ItemComponent],
+  exports: [StatsComponent,LogsComponent, ItemComponent,AnalyzeComponent],
   providers: [ToolService]
 })
 export class ToolModule { }

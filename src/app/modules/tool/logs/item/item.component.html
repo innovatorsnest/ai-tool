@@ -1,4 +1,4 @@
-<ng-container *ngFor="let log of logs">
+
 
   <div class="log__container">
 
@@ -6,7 +6,9 @@
      'log__acceptance--is_correct': log?.good === true,
      'log__acceptance--is_wrong': log?.bad === true
     }"></span>
-    <div class="row">
+
+
+    <div class="row"  *ngIf="editIntentShow === false">
       <div class="col-md-1 message__icon">
         <i class="fa fa-commenting" aria-hidden="true"></i>
       </div>
@@ -19,10 +21,20 @@
           weather.today_forecast
         </li>
       </div>
-      <div class="col-md-2 message__icons">
-        <i class="fa fa-pencil message__text-hightlight" aria-hidden="true"></i>
+
+      <div class="col-md-2 highlight--icon"  >
+        <i class="fa fa-pencil"  (click)="editIntent()"></i>
       </div>
+
     </div>
+
+    <ng-container  *ngIf="editIntentShow === true">
+      <app-analyze [id]="log['_id']['$oid']"  (closeModel)="closeAnalyzeModel($event)" [sentenceText]="log.sentence" [type]="'edit'" [intentData]="log['intentData']"  ></app-analyze>
+    </ng-container>
+
+
+
+
     <div class="row second__row">
       <div class="col-md-1  message__icon">
         <i class="fa fa-commenting" aria-hidden="true"></i>
@@ -45,7 +57,7 @@
         </li>
       </div>
 
-      <div class="col-md-2 message__icons">
+      <div class="col-md-2 highlight--icon">
         <button class="btn thumbs__button btn__green" (click)="makeSuggestion('up', log)">
           <i class="fa fa-thumbs-o-up"></i>
         </button>
@@ -57,4 +69,3 @@
     </div>
 
   </div>
-</ng-container>

@@ -61,9 +61,9 @@
                   <span class="material-icons">
                     cancel
                   </span>
-                 <p>
-                  Clear filters
-                 </p>
+                  <p>
+                    Clear filters
+                  </p>
                 </div>
               </div>
             </div>
@@ -74,7 +74,9 @@
       </mat-list-item>
       <mat-list-item role="listitem" class="list--item"> </mat-list-item>
       <div class="ai__item">
-        <app-item [logs]="allLogs"  (refreshLogsStatus)="refreshLogs($event)"></app-item>
+        <ng-container *ngFor="let log of allLogs">
+          <app-item [log]="log" (refreshLogsStatus)="refreshLogs($event)"></app-item>
+        </ng-container>
       </div>
     </mat-list>
   </mat-card>

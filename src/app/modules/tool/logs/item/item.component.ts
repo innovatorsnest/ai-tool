@@ -13,10 +13,11 @@ export class ItemComponent implements OnInit {
   isThumsup = '';
 
 
+  showAnalysModal = false;
+  editIntentShow  = false;
 
 
-
-  @Input() logs;
+  @Input() log;
 
   @Output() refreshLogsStatus = new EventEmitter();
 
@@ -59,6 +60,17 @@ export class ItemComponent implements OnInit {
     }, error => {
       console.log('error while updating sentence ', error);
     })
+  }
+
+
+  editIntent() {
+    // this.showAnalysModal = true;
+    console.log('log', this.log);
+    this.editIntentShow = true;
+  }
+
+  closeAnalyzeModel(event) {
+    this.editIntentShow = event;
   }
 
 }

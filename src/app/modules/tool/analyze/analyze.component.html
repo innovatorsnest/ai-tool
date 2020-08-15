@@ -1,0 +1,61 @@
+<!-- submit -->
+<div class="train__model" *ngIf="type === 'submit'">
+  <div class="train__model-analyze">
+    <h2 class="analyze__title p-l-20">Analyze</h2>
+    <div class="input--field">
+      <div class="form-control text__sentence" (dblclick)="mapEntity($event)" aria-label="Search">
+        {{sentenceText}}
+      </div>
+    </div>
+
+  </div>
+
+
+
+  <div class="choose__intent">
+    <label class="choose__intent-label">Intent</label>
+    <div class="choose__intent-dropdown">
+      <select class="form-control" id="sel1" #selectedIntent>
+        <option *ngFor="let intent of intentData">
+          {{intent.confidence_score.toPrecision(4)}}%:{{intent.intent}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="clearfix">
+    <button type="button" class="btn btn-brand btn-brand-md btn-secondary pull-right submit__button"
+      (click)="subSentence(selectedIntent.value)"> Submit </button>
+  </div>
+</div>
+
+<!-- edit -->
+<div class="train__model edit__model" *ngIf="type === 'edit'">
+
+  <div class="row">
+    <div class="col-md-1 message__icon">
+      <i class="fa fa-commenting" aria-hidden="true"></i>
+    </div>
+    <div class="col-md-11 message__sentence">
+      <p class="edit__sentence">Provide correct interpretation</p>
+      <div class="input--field edit__input--field">
+        <div class="form-control text__sentence" (dblclick)="mapEntity($event)" aria-label="Search">
+          {{sentenceText}}
+        </div>
+      </div>
+      <div class="choose__intent edit__intent">
+        <label class="choose__intent-label edit__intent-label">Intent</label>
+        <div class="choose__intent-dropdown">
+          <select class="form-control" id="sel1" #selectedIntent>
+            <option *ngFor="let intent of intentData">
+              {{intent.confidence_score.toPrecision(4)}}%:{{intent.intent}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix edit__clearfix">
+    <button type="button" class="btn btn-brand btn-brand-md btn-secondary pull-right submit__button"
+      (click)="subSentence(selectedIntent.value)"> Submit </button>
+    <button type="button" class="btn btn-brand btn-brand-md btn-secondary pull-right edit__cancel--button"
+      (click)="closeTheAnlyse()"> Cancel </button>
+  </div>
+</div>
