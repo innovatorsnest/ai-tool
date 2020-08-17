@@ -11,14 +11,9 @@ import tippy from 'tippy.js';
 export class ItemComponent implements OnInit {
 
   isThumsup = '';
-
-
   showAnalysModal = false;
   editIntentShow  = false;
-
-
   @Input() log;
-
   @Output() refreshLogsStatus = new EventEmitter();
 
   constructor(

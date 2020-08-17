@@ -8,8 +8,6 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./analyze.component.scss']
 })
 export class AnalyzeComponent implements OnInit {
-
-
   @Input() intentData;
   @Input() sentenceText;
   @Input() id;
@@ -18,7 +16,6 @@ export class AnalyzeComponent implements OnInit {
   constructor(
     private observableService: ObservablesService,
     private dataService: ToolService
-
   ) { }
 
   ngOnInit() {
@@ -29,7 +26,6 @@ export class AnalyzeComponent implements OnInit {
 
   mapEntity(event) {
     console.log('event', event);
-
   }
 
 
@@ -78,7 +74,6 @@ export class AnalyzeComponent implements OnInit {
 
 
   closeTheAnlyse() {
-
     this.closeModel.emit(false);
   }
 

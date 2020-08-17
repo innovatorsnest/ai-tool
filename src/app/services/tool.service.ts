@@ -42,7 +42,7 @@ export class ToolService {
   }
 
   gettingAllEntity() {
-    return this._http.get(this.nlpUrl + '/nlpapi/entity/all', this.httpOptions)
+    return this._http.get(this.nlpUrl + '/nlpapi/entity/all/', this.httpOptions)
       .pipe(
         map((res: Response) => {
           console.log('response fr  om getting ', res);
@@ -63,6 +63,17 @@ export class ToolService {
   allConversationLogs() {
     return this._http.get(this.nlpUrl + '/nlpapi/conversation/logs?intent='+ ''
     + '&entity=' + '' + '&metric=' + '' + '&logType=', this.httpOptions)
+      .pipe(
+        map((res: Response) => {
+          console.log('response from getting the all conversation logs', res);
+          return res;
+        })
+      )
+  }
+
+  filterLogsApi(intent = "",entity = "",logType = "",metric = "" ) {
+    return this._http.get(this.nlpUrl + '/nlpapi/conversation/logs?intent='+ intent
+    + '&entity=' + entity + '&metric=' + metric + '&logType='+ logType, this.httpOptions)
       .pipe(
         map((res: Response) => {
           console.log('response from getting the all conversation logs', res);

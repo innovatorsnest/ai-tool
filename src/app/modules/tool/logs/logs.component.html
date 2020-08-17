@@ -7,45 +7,34 @@
         <div class="row">
           <div class="col-md-2">
             <div class="form-group">
-              <select class="form-control logs--dropdowns">
+              <select class="form-control logs--dropdowns" #type (change)="filterLogs(type.value,intent.value,entity.value,metric.value)">
                 <option value="0" selected>All Types</option>
-                <option value="1">Featured</option>
-                <option value="2">Most popular</option>
-                <option value="3">Top rated</option>
-                <option value="4">Most commented</option>
+                <option *ngFor="let type of allTypes" [value]="type">{{type}}</option>
               </select>
             </div>
           </div>
           <div class="col-md-2">
             <div class="form-group">
-              <select class="form-control logs--dropdowns">
-                <option value="0" selected>All Intents</option>
-                <option value="1">Featured</option>
-                <option value="2">Most popular</option>
-                <option value="3">Top rated</option>
-                <option value="4">Most commented</option>
+              <select class="form-control logs--dropdowns" #intent (change)="filterLogs(type.value,intent.value,entity.value,metric.value)">
+                <option value="" selected>All Intents</option>
+                <option *ngFor="let intent of getAllIntents" [value]="intent">{{intent}}</option>
               </select>
             </div>
           </div>
           <div class="col-md-2">
             <div class="form-group">
-              <select class="form-control logs--dropdowns">
-                <option value="0" selected>All Entities</option>
-                <option value="1">Featured</option>
-                <option value="2">Most popular</option>
-                <option value="3">Top rated</option>
-                <option value="4">Most commented</option>
+              <select class="form-control logs--dropdowns"  #entity (change)="filterLogs(type.value,intent.value,entity.value,metric.value)">
+                <option value="" selected>All Entities</option>
+                <option *ngFor="let entity of allEntities" [value]="entity">{{entity}}</option>
+
               </select>
             </div>
           </div>
           <div class="col-md-2">
             <div class="form-group">
-              <select class="form-control logs--dropdowns">
-                <option value="0" selected>All Services</option>
-                <option value="1">Featured</option>
-                <option value="2">Most popular</option>
-                <option value="3">Top rated</option>
-                <option value="4">Most commented</option>
+              <select class="form-control logs--dropdowns" #metric  (change)="filterLogs(type.value,intent.value,entity.value,metric.value)">
+                <option value="" selected>All Metrics</option>
+                <option *ngFor="let metric of allMetric" [value]="metric">{{metric}}</option>
               </select>
             </div>
           </div>
@@ -57,7 +46,7 @@
                 </div>
               </div>
               <div class="col-md-6">
-                <div class="logs__filter-clear">
+                <div class="logs__filter-clear"  (click)="clearFilters()">
                   <span class="material-icons">
                     cancel
                   </span>
