@@ -32,7 +32,7 @@
           </div>
           <div class="col-md-2">
             <div class="form-group">
-              <select class="form-control logs--dropdowns" #metric  (change)="filterLogs(type.value,intent.value,entity.value,metric.value)">
+              <select class="form-control logs--dropdowns" disabled #metric  (change)="filterLogs(type.value,intent.value,entity.value,metric.value)">
                 <option value="" selected>All Metrics</option>
                 <option *ngFor="let metric of allMetric" [value]="metric">{{metric}}</option>
               </select>

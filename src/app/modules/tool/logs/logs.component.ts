@@ -13,13 +13,11 @@ export class LogsComponent implements OnInit {
   allLogs: any;
 
 
-  allTypes = [
-    'not annotated',
-    'annotated by user',
-    'correct predictions',
-    'wrong predictions',
-    'rated as good',
-    'rated as bad',
+  allTypes =  [
+    'good',
+    'bad',
+    'annotated',
+    'non_annotated'
   ]
   getAllIntents: any;
 
