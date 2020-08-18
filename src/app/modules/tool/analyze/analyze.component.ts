@@ -1,6 +1,6 @@
 import { ToolService } from './../../../services/tool.service';
 import { ObservablesService } from './../../../services/observable.service';
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-analyze',
@@ -14,6 +14,8 @@ export class AnalyzeComponent implements OnInit {
   @Input() type;
   @Input() intent;
   @Output() closeModel = new EventEmitter();
+
+
   intentFetched: string;
   constructor(
     private observableService: ObservablesService,
@@ -29,8 +31,15 @@ export class AnalyzeComponent implements OnInit {
       }
     })
 
+    this.sentenceText = this.sentenceText.split(' ');
+
+    console.log('sentence text', this.sentenceText);
+
+
     console.log('intent data formattted', intentDataFormated)
-    this.intentFetched = `${intentDataFormated[0].confidence_score.toPrecision(4)}%:${intentDataFormated[0].intent}`
+    if(intentDataFormated[0]) {
+      this.intentFetched = `${intentDataFormated[0].confidence_score.toPrecision(4)}%:${intentDataFormated[0].intent}`
+    }
     console.log('intent fetched ', this.intentFetched);
     console.log('type ', this.type);
 
@@ -89,6 +98,14 @@ export class AnalyzeComponent implements OnInit {
 
   closeTheAnlyse(value) {
     this.closeModel.emit(value);
+  }
+
+  onShown(event,ref) {
+    console.log('event', event);
+
+    ref.show();
+
+
   }
 
 

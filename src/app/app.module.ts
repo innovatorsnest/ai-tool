@@ -10,7 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ToolComponent } from './modules/tool/tool.component';
-
+import { NgxPopper } from 'angular-popper';
 
 
 @NgModule({
@@ -23,6 +23,7 @@ import { ToolComponent } from './modules/tool/tool.component';
     AppRoutingModule,
     MaterialModule,
     BrowserAnimationsModule,
+    NgxPopper,
     FormsModule,
     HttpClientModule,
     ToolModule

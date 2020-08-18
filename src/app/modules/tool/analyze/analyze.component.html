@@ -2,10 +2,41 @@
 <div class="train__model" *ngIf="type === 'submit'">
   <div class="train__model-analyze">
     <h2 class="analyze__title p-l-20">Analyze</h2>
-    <div class="input--field">
-      <div class="form-control text__sentence" (dblclick)="mapEntity($event)" aria-label="Search">
+
+    <div class="input--field form-control text__sentence">
+      <ng-container *ngFor="let word of sentenceText">
+        <span [popper]="tooltipcontent" [popperPlacement]="'bottom-start'" [popperHideOnClickOutside]="true"
+          (dblclick)="onShown($event, tooltipcontent)">
+          {{word}}
+        </span>
+        <popper-content #tooltipcontent>
+          <span class="popper popper__design">
+            <span class="popper__arrow"></span>
+
+            <div class="dropdown">
+              select the dropdown
+            </div>
+          </span>
+        </popper-content>
+      </ng-container>
+
+
+
+      <!-- <div class="form-control text__sentence" [popper]="tooltipcontent"
+        [popperPlacement]="'right'" [popperHideOnClickOutside]="true"
+        (dblclick)="onShown($event, tooltipcontent)"
+        aria-label="Search">
         {{sentenceText}}
-      </div>
+      </div> -->
+      <!-- <popper-content #tooltipcontent>
+        <span class="popper popper__design">
+          <span class="popper__arrow"></span>
+
+          <div class="dropdown">
+            select
+          </div>
+        </span>
+      </popper-content> -->
     </div>
 
   </div>
