@@ -7,15 +7,15 @@
         <div class="row">
           <div class="col-md-2">
             <div class="form-group">
-              <select class="form-control logs--dropdowns" #type (change)="filterLogs(type.value,intent.value,entity.value,metric.value)">
-                <option value="0" selected>All Types</option>
+              <select class="form-control logs--dropdowns" [(ngModel)]="filter.type" (change)="filterLogs()">
+                <option value="" selected>All Types</option>
                 <option *ngFor="let type of allTypes" [value]="type">{{type}}</option>
               </select>
             </div>
           </div>
           <div class="col-md-2">
             <div class="form-group">
-              <select class="form-control logs--dropdowns" #intent (change)="filterLogs(type.value,intent.value,entity.value,metric.value)">
+              <select class="form-control logs--dropdowns"  [(ngModel)]="filter.intent" (change)="filterLogs()">
                 <option value="" selected>All Intents</option>
                 <option *ngFor="let intent of getAllIntents" [value]="intent">{{intent}}</option>
               </select>
@@ -23,7 +23,7 @@
           </div>
           <div class="col-md-2">
             <div class="form-group">
-              <select class="form-control logs--dropdowns"  #entity (change)="filterLogs(type.value,intent.value,entity.value,metric.value)">
+              <select class="form-control logs--dropdowns"   [(ngModel)]="filter.entity" (change)="filterLogs()">
                 <option value="" selected>All Entities</option>
                 <option *ngFor="let entity of allEntities" [value]="entity">{{entity}}</option>
 
@@ -32,7 +32,7 @@
           </div>
           <div class="col-md-2">
             <div class="form-group">
-              <select class="form-control logs--dropdowns" disabled #metric  (change)="filterLogs(type.value,intent.value,entity.value,metric.value)">
+              <select class="form-control logs--dropdowns" disabled #metric  (change)="filterLogs()">
                 <option value="" selected>All Metrics</option>
                 <option *ngFor="let metric of allMetric" [value]="metric">{{metric}}</option>
               </select>

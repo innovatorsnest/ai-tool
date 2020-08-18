@@ -31,7 +31,7 @@
     </div>
 
     <ng-container  *ngIf="editIntentShow === true">
-      <app-analyze [id]="log['_id']['$oid']"  (closeModel)="closeAnalyzeModel($event)" [sentenceText]="log.sentence" [type]="'edit'" [intentData]="log['intentData']"  ></app-analyze>
+      <app-analyze [id]="log['_id']['$oid']" [intent]="log['intent']"  (closeModel)="closeAnalyzeModel($event)" [sentenceText]="log.sentence" [type]="'edit'" [intentData]="log['intentData']"></app-analyze>
     </ng-container>
 
     <div class="row second__row">

@@ -12,7 +12,9 @@ export class AnalyzeComponent implements OnInit {
   @Input() sentenceText;
   @Input() id;
   @Input() type;
+  @Input() intent;
   @Output() closeModel = new EventEmitter();
+  intentFetched: string;
   constructor(
     private observableService: ObservablesService,
     private dataService: ToolService
@@ -20,7 +22,18 @@ export class AnalyzeComponent implements OnInit {
 
   ngOnInit() {
 
+
+    const intentDataFormated = this.intentData.filter((data) => {
+      if (data.intent === this.intent) {
+        return data.intent;
+      }
+    })
+
+    console.log('intent data formattted', intentDataFormated)
+    this.intentFetched = `${intentDataFormated[0].confidence_score.toPrecision(4)}%:${intentDataFormated[0].intent}`
+    console.log('intent fetched ', this.intentFetched);
     console.log('type ', this.type);
+
   }
 
 
@@ -66,6 +79,7 @@ export class AnalyzeComponent implements OnInit {
       if (response["success"] === true) {
         this.observableService.updateSpinnerStatus(false);
         this.observableService.displaySnackbar("Successfully Submitted Sentence");
+        this.closeTheAnlyse('callApi');
       }
     }, error => {
       console.log('error while updating sentence ', error);
@@ -73,8 +87,8 @@ export class AnalyzeComponent implements OnInit {
   }
 
 
-  closeTheAnlyse() {
-    this.closeModel.emit(false);
+  closeTheAnlyse(value) {
+    this.closeModel.emit(value);
   }
 
 

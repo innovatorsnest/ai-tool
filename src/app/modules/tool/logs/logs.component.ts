@@ -28,6 +28,14 @@ export class LogsComponent implements OnInit {
     'non_annotated'
   ]
 
+  filter = {
+    type: "",
+    intent: "",
+    entity: "",
+    metric: "",
+  }
+
+
   allEntities: Response;
 
 
@@ -90,9 +98,9 @@ export class LogsComponent implements OnInit {
 
   filterLogs(type,intent,entity,metric) {
     this.observableService.updateSpinnerStatus(true);
-    console.log('type,intent,entity,metric', `${type} ${intent} ${entity} ${metric}`);
+    console.log('type,intent,entity,metric', `${this.filter.type} ${this.filter.intent} ${this.filter.entity} ${this.filter.metric}`);
 
-    this.dataService.filterLogsApi(intent,entity,type,metric).subscribe((response) => {
+    this.dataService.filterLogsApi(this.filter.intent,this.filter.entity,this.filter.type,this.filter.metric).subscribe((response) => {
 
       console.log('response while getting the filtering results', response);
       this.allLogs = response["logs"];
@@ -106,6 +114,10 @@ export class LogsComponent implements OnInit {
   }
 
   clearFilters() {
+    // resetting the values of the filter
+    this.filter.type = ''
+    this.filter.intent = ''
+    this.filter.entity = ''
     this.getAllLogs();
   }
 

@@ -44,10 +44,11 @@
       <div class="choose__intent edit__intent">
         <label class="choose__intent-label edit__intent-label">Intent</label>
         <div class="choose__intent-dropdown">
-          <select class="form-control" id="sel1" #selectedIntent>
+          <select class="form-control" id="sel1" [(ngModel)]="intentFetched" #selectedIntent>
             <option *ngFor="let intent of intentData">
               {{intent.confidence_score.toPrecision(4)}}%:{{intent.intent}}</option>
           </select>
+
         </div>
       </div>
     </div>
@@ -56,6 +57,6 @@
     <button type="button" class="btn btn-brand btn-brand-md btn-secondary pull-right submit__button"
       (click)="subSentence(selectedIntent.value)"> Submit </button>
     <button type="button" class="btn btn-brand btn-brand-md btn-secondary pull-right edit__cancel--button"
-      (click)="closeTheAnlyse()"> Cancel </button>
+      (click)="closeTheAnlyse('close')"> Cancel </button>
   </div>
 </div>

@@ -6,14 +6,15 @@ import { LogsComponent } from './logs/logs.component';
 import { MaterialModule } from 'src/app/shared/material.module';
 import { ItemComponent } from './logs/item/item.component';
 import { AnalyzeComponent } from './analyze/analyze.component';
-
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [StatsComponent, LogsComponent, ItemComponent, AnalyzeComponent],
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule
   ],
   exports: [StatsComponent,LogsComponent, ItemComponent,AnalyzeComponent],
   providers: [ToolService]

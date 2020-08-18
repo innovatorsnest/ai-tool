@@ -1,7 +1,9 @@
+
 import { ObservablesService } from './../../../../services/observable.service';
 import { ToolService } from './../../../../services/tool.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import tippy from 'tippy.js';
+
 
 @Component({
   selector: 'app-item',
@@ -12,7 +14,7 @@ export class ItemComponent implements OnInit {
 
   isThumsup = '';
   showAnalysModal = false;
-  editIntentShow  = false;
+  editIntentShow = false;
   @Input() log;
   @Output() refreshLogsStatus = new EventEmitter();
 
@@ -34,7 +36,7 @@ export class ItemComponent implements OnInit {
         intent: log.intent,
         entities: log.entities,
         good: suggestion === 'up' ? true : false,
-        bad: suggestion === 'down' ? true: false,
+        bad: suggestion === 'down' ? true : false,
         annotated: true,
         non_annotated: false
       }
@@ -65,7 +67,14 @@ export class ItemComponent implements OnInit {
   }
 
   closeAnalyzeModel(event) {
-    this.editIntentShow = event;
+    if(event === 'close') {
+      this.editIntentShow = event;
+    }
+    if(event === 'callApi') {
+      this.editIntentShow = event;
+      this.refreshLogsStatus.emit(true);
+    }
+
   }
 
 }
