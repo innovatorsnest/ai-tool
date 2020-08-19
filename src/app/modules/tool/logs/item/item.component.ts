@@ -16,6 +16,7 @@ export class ItemComponent implements OnInit {
   showAnalysModal = false;
   editIntentShow = false;
   @Input() log;
+  @Input() entities;
   @Output() refreshLogsStatus = new EventEmitter();
 
   constructor(

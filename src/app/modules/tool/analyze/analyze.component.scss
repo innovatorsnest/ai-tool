@@ -137,7 +137,6 @@
   }
 }
 
-
 // popover
 body {
   height: 200vh;
@@ -178,10 +177,29 @@ body {
   }
 }
 
+.popper {
+  &__design {
+    position: relative;
+    left: 442;
+    top: 370;
 
-.popper__design {
-  position: relative;
-  left: 442;
-  top: 370;
+    &-title {
+      font-size: 1rem;
+      margin-bottom: 0.9375rem;
+    }
+    &-box {
+      background-color: #EAEAEC;
+    }
+  }
+
+  &__dropdown-area {
+
+    display: flex;
+
+    .trash--icon {
+      padding: 10px;
+      color: red;
+    }
+
+  }
 }
-

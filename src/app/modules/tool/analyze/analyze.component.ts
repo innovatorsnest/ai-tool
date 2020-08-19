@@ -13,14 +13,19 @@ export class AnalyzeComponent implements OnInit {
   @Input() id;
   @Input() type;
   @Input() intent;
+  @Input() entities;
   @Output() closeModel = new EventEmitter();
+
+
 
 
   intentFetched: string;
   constructor(
     private observableService: ObservablesService,
     private dataService: ToolService
-  ) { }
+  ) {
+
+  }
 
   ngOnInit() {
 

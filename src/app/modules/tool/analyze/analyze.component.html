@@ -5,7 +5,8 @@
 
     <div class="input--field form-control text__sentence">
       <ng-container *ngFor="let word of sentenceText">
-        <span [popper]="tooltipcontent" [popperPlacement]="'bottom-start'" [popperHideOnClickOutside]="true"
+
+        <span [popper]="tooltipcontent" [popperHideOnMouseLeave]="false" [popperHideOnClickOutside]="false" [popperPlacement]="'bottom-start'"
           (dblclick)="onShown($event, tooltipcontent)">
           {{word}}
         </span>
@@ -13,30 +14,20 @@
           <span class="popper popper__design">
             <span class="popper__arrow"></span>
 
-            <div class="dropdown">
-              select the dropdown
+            <div class="popper__design-box">
+              <h1 class="popper__design-title">Choose entity</h1>
+              <span class="popper__dropdown-area">
+                <select class="form-control" id="sel1" #selectedIntent>
+                  <option *ngFor="let entity of entities">
+                    {{entity}}</option>
+                </select>
+
+                <i class="fa fa-trash trash--icon" aria-hidden="true"></i>
+              </span>
             </div>
           </span>
         </popper-content>
       </ng-container>
-
-
-
-      <!-- <div class="form-control text__sentence" [popper]="tooltipcontent"
-        [popperPlacement]="'right'" [popperHideOnClickOutside]="true"
-        (dblclick)="onShown($event, tooltipcontent)"
-        aria-label="Search">
-        {{sentenceText}}
-      </div> -->
-      <!-- <popper-content #tooltipcontent>
-        <span class="popper popper__design">
-          <span class="popper__arrow"></span>
-
-          <div class="dropdown">
-            select
-          </div>
-        </span>
-      </popper-content> -->
     </div>
 
   </div>
@@ -67,10 +58,31 @@
     </div>
     <div class="col-md-11 message__sentence">
       <p class="edit__sentence">Provide correct interpretation</p>
-      <div class="input--field edit__input--field">
-        <div class="form-control text__sentence" (dblclick)="mapEntity($event)" aria-label="Search">
-          {{sentenceText}}
-        </div>
+      <div class="input--field form-control text__sentence">
+        <ng-container *ngFor="let word of sentenceText">
+
+          <span [popper]="tooltipcontent" [popperHideOnMouseLeave]="false" [popperHideOnClickOutside]="false" [popperPlacement]="'bottom-start'"
+            (dblclick)="onShown($event, tooltipcontent)">
+            {{word}}
+          </span>
+          <popper-content #tooltipcontent>
+            <span class="popper popper__design">
+              <span class="popper__arrow"></span>
+
+              <div class="popper__design-box">
+                <h1 class="popper__design-title">Choose entity</h1>
+                <span class="popper__dropdown-area">
+                  <select class="form-control" id="sel1" #selectedIntent>
+                    <option *ngFor="let entity of entities">
+                      {{entity}}</option>
+                  </select>
+
+                  <i class="fa fa-trash trash--icon" aria-hidden="true"></i>
+                </span>
+              </div>
+            </span>
+          </popper-content>
+        </ng-container>
       </div>
       <div class="choose__intent edit__intent">
         <label class="choose__intent-label edit__intent-label">Intent</label>

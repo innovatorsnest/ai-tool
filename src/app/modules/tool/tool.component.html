@@ -24,7 +24,7 @@
 
       <!-- Analyze panel -->
       <ng-container *ngIf="showAnalysModal === true">
-        <app-analyze  [id]="sentenceData['id']" [sentenceText]="sentenceText" [type]="'submit'" [intentData]="sentenceData['intentData']"></app-analyze>
+        <app-analyze  [id]="sentenceData['id']" [entities]="getEntities" [sentenceText]="sentenceText" [type]="'submit'" [intentData]="sentenceData['intentData']"></app-analyze>
       </ng-container>
 
     </div>

@@ -26,7 +26,7 @@ export class ToolComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    this.getAllEntities();
   }
 
   getAllEntities() {
