@@ -12,6 +12,7 @@ import tippy from 'tippy.js';
 })
 export class ItemComponent implements OnInit {
 
+
   isThumsup = '';
   showAnalysModal = false;
   editIntentShow = false;
@@ -69,10 +70,10 @@ export class ItemComponent implements OnInit {
 
   closeAnalyzeModel(event) {
     if(event === 'close') {
-      this.editIntentShow = event;
+      this.editIntentShow = false;
     }
     if(event === 'callApi') {
-      this.editIntentShow = event;
+      this.editIntentShow = false;
       this.refreshLogsStatus.emit(true);
     }
 

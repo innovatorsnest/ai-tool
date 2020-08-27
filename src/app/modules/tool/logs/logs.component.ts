@@ -1,8 +1,8 @@
 import { map } from 'rxjs/operators';
 import { ObservablesService } from './../../../services/observable.service';
 import { ToolService } from './../../../services/tool.service';
-import { Component, OnInit, Input } from '@angular/core';
-
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import {MatPaginator} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-logs',
@@ -11,6 +11,8 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class LogsComponent implements OnInit {
   allLogs: any;
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
 
   allTypes =  [
@@ -56,13 +58,10 @@ export class LogsComponent implements OnInit {
 
   getAllLogs() {
 
-
-
     this.observableService.updateSpinnerStatus(true);
     this.dataService.allConversationLogs().subscribe((response) => {
       if (response["success"] === true) {
         this.allLogs = response["logs"];
-
         if(this.allLogs.length > 0) {
           this.getAllIntents = this.allLogs.map((log) => {
             return log.intent;

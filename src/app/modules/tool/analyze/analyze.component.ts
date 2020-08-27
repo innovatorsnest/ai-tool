@@ -97,7 +97,7 @@ export class AnalyzeComponent implements OnInit {
       }
     }, error => {
       console.log('error while updating sentence ', error);
-    })
+    });
   }
 
 

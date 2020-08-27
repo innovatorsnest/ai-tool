@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { NgxPopper } from 'angular-popper';
 import {NgxPopperModule} from 'ngx-popper';
 
+
 @NgModule({
   declarations: [StatsComponent, LogsComponent, ItemComponent, AnalyzeComponent, PopperDirective],
   imports: [

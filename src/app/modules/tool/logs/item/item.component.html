@@ -1,6 +1,4 @@
-
-
-  <div class="log__container">
+<div class="log__container">
 
 
 
@@ -9,62 +7,62 @@
       'log__acceptance--is_wrong': log?.bad === true
      }"></span>
 
-    <div class="row"  *ngIf="editIntentShow === false">
+    <div class="row" *ngIf="editIntentShow === false">
 
-      <div class="col-md-1 message__icon">
-        <i class="fa fa-commenting" aria-hidden="true"></i>
-      </div>
-      <div class="col-md-6 message__sentence">
-        {{log.sentence}}
-      </div>
-      <div class="col-md-3 message__intent">
-        <li class="message__text-hightlight"> Intent:</li>
-        <li>
-          weather.today_forecast
-        </li>
-      </div>
+        <div class="col-md-1 message__icon">
+            <i class="fa fa-commenting" aria-hidden="true"></i>
+        </div>
+        <div class="col-md-6 message__sentence">
+            {{log.sentence}}
+        </div>
+        <div class="col-md-3 message__intent">
+            <li class="message__text-hightlight"> Intent:</li>
+            <li>
+                {{log.intent}}
+            </li>
+        </div>
 
-      <div class="col-md-2 highlight--icon"  >
-        <i class="fa fa-pencil"  (click)="editIntent()"></i>
-      </div>
+        <div class="col-md-2 highlight--icon">
+            <i class="fa fa-pencil" (click)="editIntent()"></i>
+        </div>
 
     </div>
 
-    <ng-container  *ngIf="editIntentShow === true">
-      <app-analyze [id]="log['_id']['$oid']" [entities]="entities" [intent]="log['intent']"  (closeModel)="closeAnalyzeModel($event)" [sentenceText]="log.sentence" [type]="'edit'" [intentData]="log['intentData']"></app-analyze>
+    <ng-container *ngIf="editIntentShow === true">
+        <app-analyze [id]="log['_id']['$oid']" [entities]="entities" [intent]="log['intent']" (closeModel)="closeAnalyzeModel($event)" [sentenceText]="log.sentence" [type]="'edit'" [intentData]="log['intentData']"></app-analyze>
     </ng-container>
 
     <div class="row second__row">
-      <div class="col-md-1  message__icon">
-        <i class="fa fa-commenting" aria-hidden="true"></i>
-      </div>
-      <div class="col-md-6 message__sentence">
+        <div class="col-md-1  message__icon">
+            <i class="fa fa-commenting" aria-hidden="true"></i>
+        </div>
+        <div class="col-md-6 message__sentence">
 
-        <li class="message__text-hightlight">
-          identified as:
-        </li>
+            <li class="message__text-hightlight">
+                identified as:
+            </li>
 
-        <li>
-             {{log.sentence}}
-        </li>
-      </div>
+            <li>
+                {{log.sentence}}
+            </li>
+        </div>
 
-      <div class="col-md-3 message__icons">
-        <li class="message__text-hightlight">identified as:</li>
-        <li>
-          weather.today_forecast
-        </li>
-      </div>
+        <div class="col-md-3 message__icons">
+            <li class="message__text-hightlight">identified as:</li>
+            <li class="identified__intent">
+                {{log.intent}}
+            </li>
+        </div>
 
-      <div class="col-md-2 highlight--icon">
-        <button class="btn thumbs__button btn__green" (click)="makeSuggestion('up', log)">
+        <div class="col-md-2 highlight--icon">
+            <button class="btn thumbs__button btn__green" (click)="makeSuggestion('up', log)">
           <i class="fa fa-thumbs-o-up"></i>
         </button>
-        <button class="btn thumbs__button btn__red" (click)="makeSuggestion('down', log)">
+            <button class="btn thumbs__button btn__red" (click)="makeSuggestion('down', log)">
           <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
         </button>
-      </div>
+        </div>
 
     </div>
 
-  </div>
+</div>
