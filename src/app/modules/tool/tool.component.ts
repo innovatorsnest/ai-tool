@@ -26,22 +26,9 @@ export class ToolComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getAllEntities();
+    // this.getAllEntities();
   }
 
-  getAllEntities() {
-
-    this.observableService.updateSpinnerStatus(true);
-    this.dataService.gettingAllEntity().subscribe((response) => {
-      this.getEntities = response["data"];
-      this.observableService.updateSpinnerStatus(false);
-
-    }, (error) => {
-      if (error) {
-        console.log('error inside the getting Entity', error);
-      }
-    })
-  }
 
   logs(value) {
     console.log('value for toggle', value);
@@ -50,11 +37,15 @@ export class ToolComponent implements OnInit {
 
 
   analyzeSentence() {
-    console.log("getting the sentence", this.sentence);
+    console.log("getting the sentence type", typeof(this.sentence));
+
 
     this.observableService.updateSpinnerStatus(true);
 
+
+
     if (this.sentence !== undefined) {
+
       const payload = {
         query: this.sentence,
         lang: "en"
@@ -63,16 +54,20 @@ export class ToolComponent implements OnInit {
       this.dataService.gettingDataFromNlu(payload).subscribe(
         response => {
           console.log("response from getting the data from the nlu", response);
-          this.sentenceData = response;
-          this.sentenceText = this.sentence;
-          this.observableService.updateSpinnerStatus(false);
           this.showAnalysModal = true;
+          this.sentenceText = this.sentence;
+          this.sentenceData = response;
+          this.observableService.updateSpinnerStatus(false);
         },
         error => {
           console.log("error while training the response", error);
         }
       );
     }
+  }
+
+  cancelLogic() {
+    this.showAnalysModal = false;
   }
 
 

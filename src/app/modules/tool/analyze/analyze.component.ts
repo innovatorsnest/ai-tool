@@ -20,6 +20,7 @@ export class AnalyzeComponent implements OnInit {
 
 
   intentFetched: string;
+  getEntities: any;
   constructor(
     private observableService: ObservablesService,
     private dataService: ToolService
@@ -29,6 +30,7 @@ export class AnalyzeComponent implements OnInit {
 
   ngOnInit() {
 
+    this.getAllEntities();
 
     const intentDataFormated = this.intentData.filter((data) => {
       if (data.intent === this.intent) {
@@ -42,12 +44,31 @@ export class AnalyzeComponent implements OnInit {
 
 
     console.log('intent data formattted', intentDataFormated)
-    if(intentDataFormated[0]) {
+    if (intentDataFormated[0]) {
       this.intentFetched = `${intentDataFormated[0].confidence_score.toPrecision(4)}%:${intentDataFormated[0].intent}`
     }
     console.log('intent fetched ', this.intentFetched);
     console.log('type ', this.type);
 
+
+
+  }
+
+
+  getAllEntities() {
+
+    this.observableService.updateSpinnerStatus(true);
+    this.dataService.gettingAllEntity().subscribe((response) => {
+      console.log('getting the response of the entity', response);
+
+      this.getEntities = response["data"]["userEntities"];
+      this.observableService.updateSpinnerStatus(false);
+
+    }, (error) => {
+      if (error) {
+        console.log('error inside the getting Entity', error);
+      }
+    });
   }
 
 
@@ -105,7 +126,7 @@ export class AnalyzeComponent implements OnInit {
     this.closeModel.emit(value);
   }
 
-  onShown(event,ref) {
+  onShown(event, ref) {
     console.log('event', event);
 
     ref.show();

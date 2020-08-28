@@ -2,7 +2,7 @@ import { map } from 'rxjs/operators';
 import { ObservablesService } from './../../../services/observable.service';
 import { ToolService } from './../../../services/tool.service';
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-logs',
@@ -12,10 +12,10 @@ import {MatPaginator} from '@angular/material/paginator';
 export class LogsComponent implements OnInit {
   allLogs: any;
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
 
-  allTypes =  [
+  allTypes = [
     'good',
     'bad',
     'annotated',
@@ -62,44 +62,29 @@ export class LogsComponent implements OnInit {
     this.dataService.allConversationLogs().subscribe((response) => {
       if (response["success"] === true) {
         this.allLogs = response["logs"];
-        if(this.allLogs.length > 0) {
+        if (this.allLogs.length > 0) {
           this.getAllIntents = this.allLogs.map((log) => {
             return log.intent;
           })
 
-          this.getAllEntities();
         }
         this.observableService.updateSpinnerStatus(false);
       }
 
-
-
-
-
       console.log('%c all conversation logs', 'color: yellow', this.allLogs);
-
 
     }, (error) => {
       console.log('error  while getting getting logs', error);
     })
   }
 
-  getAllEntities() {
-    this.dataService.gettingAllEntity().subscribe((response) => {
-      console.log('response from getting the entities', response);
-      this.allEntities = response["data"];
 
-    }, (error => {
-      console.log('error while getting all the entities', error);
 
-    }))
-  }
-
-  filterLogs(type,intent,entity,metric) {
+  filterLogs(type, intent, entity, metric) {
     this.observableService.updateSpinnerStatus(true);
     console.log('type,intent,entity,metric', `${this.filter.type} ${this.filter.intent} ${this.filter.entity} ${this.filter.metric}`);
 
-    this.dataService.filterLogsApi(this.filter.intent,this.filter.entity,this.filter.type,this.filter.metric).subscribe((response) => {
+    this.dataService.filterLogsApi(this.filter.intent, this.filter.entity, this.filter.type, this.filter.metric).subscribe((response) => {
 
       console.log('response while getting the filtering results', response);
       this.allLogs = response["logs"];
@@ -121,8 +106,8 @@ export class LogsComponent implements OnInit {
   }
 
   refreshLogs(event) {
-   console.log('event', event);
-   this.getAllLogs();
+    console.log('event', event);
+    this.getAllLogs();
   }
 
 }

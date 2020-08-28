@@ -11,22 +11,33 @@
       <nav class="navbar navbar-light bg-light">
         <form class="form-inline">
           <input class="form-control text__sentence" [ngModelOptions]="{standalone: true}" [(ngModel)]="sentence"
-            type="search" placeholder="Try a sentence" aria-label="Search">
+            type="search" placeholder="Try a sentence" aria-label="Search"
+
+            [disabled]="showAnalysModal === true ? true: false">
 
           <span class="button">
 
             <button class="btn btn-lg btn__secondary analyze__button"
+            *ngIf="showAnalysModal === false"
               [ngClass]="sentence.length > 0 ? 'btn__enable': 'btn__disabled'" type="submit"
               (click)="analyzeSentence()">Analyze</button>
+            <button class="btn btn-lg btn__secondary analyze__button-cancel"
+              *ngIf="showAnalysModal === true"
+              [ngClass]="sentence.length > 0 ? 'btn__enable': 'btn__disabled'" type="submit"
+              (click)="cancelLogic()">
+              <span class="material-icons">
+                cancel
+              </span>
+            </button>
           </span>
         </form>
       </nav>
 
       <!-- Analyze panel -->
       <ng-container *ngIf="showAnalysModal === true">
-        <app-analyze  [id]="sentenceData['id']" [entities]="getEntities" [sentenceText]="sentenceText" [type]="'submit'" [intentData]="sentenceData['intentData']"></app-analyze>
+        <app-analyze [id]="sentenceData['id']" [sentenceText]="sentenceText" [type]="'submit'"
+          [intentData]="sentenceData['intentData']"></app-analyze>
       </ng-container>
-
     </div>
 
 

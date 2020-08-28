@@ -4,9 +4,9 @@
     <h2 class="analyze__title p-l-20">Analyze</h2>
 
     <div class="input--field form-control text__sentence">
-      <ng-container *ngFor="let word of sentenceText">
+      <ng-container   *ngFor="let word of sentenceText">
 
-        <span [popper]="tooltipcontent" [popperHideOnMouseLeave]="false" [popperHideOnClickOutside]="false" [popperPlacement]="'bottom-start'"
+        <span popperDisableStyle="true" [popper]="tooltipcontent" [popperHideOnMouseLeave]="false" [popperHideOnClickOutside]="false" [popperPlacement]="'bottom-start'"
           (dblclick)="onShown($event, tooltipcontent)">
           {{word}}
         </span>
@@ -18,8 +18,8 @@
               <h1 class="popper__design-title">Choose entity</h1>
               <span class="popper__dropdown-area">
                 <select class="form-control" id="sel1" #selectedIntent>
-                  <option *ngFor="let entity of entities">
-                    {{entity}}</option>
+                  <option *ngFor="let entity of getEntities">
+                    {{entity.name}}</option>
                 </select>
 
                 <i class="fa fa-trash trash--icon" aria-hidden="true"></i>
@@ -73,8 +73,8 @@
                 <h1 class="popper__design-title">Choose entity</h1>
                 <span class="popper__dropdown-area">
                   <select class="form-control" id="sel1" #selectedIntent>
-                    <option *ngFor="let entity of entities">
-                      {{entity}}</option>
+                    <option *ngFor="let entity of getEntities">
+                      {{entity.name}}</option>
                   </select>
 
                   <i class="fa fa-trash trash--icon" aria-hidden="true"></i>
