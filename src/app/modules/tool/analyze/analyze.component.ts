@@ -14,13 +14,18 @@ export class AnalyzeComponent implements OnInit {
   @Input() type;
   @Input() intent;
   @Input() entities;
+  @Input() entityData;
   @Output() closeModel = new EventEmitter();
 
 
 
 
+
+  mappedEntity: any;
   intentFetched: string;
   getEntities: any;
+  entityList: any;
+  sentenceList: any;
   constructor(
     private observableService: ObservablesService,
     private dataService: ToolService
@@ -30,17 +35,21 @@ export class AnalyzeComponent implements OnInit {
 
   ngOnInit() {
 
+    console.log('%c getting the entity data ', 'color: yellow', this.entityData);
+
+    this.mapSentence();
     this.getAllEntities();
+
 
     const intentDataFormated = this.intentData.filter((data) => {
       if (data.intent === this.intent) {
         return data.intent;
       }
-    })
+    });
 
-    this.sentenceText = this.sentenceText.split(' ');
 
-    console.log('sentence text', this.sentenceText);
+
+
 
 
     console.log('intent data formattted', intentDataFormated)
@@ -49,17 +58,102 @@ export class AnalyzeComponent implements OnInit {
     }
     console.log('intent fetched ', this.intentFetched);
     console.log('type ', this.type);
+  }
 
 
+  mapSentence() {
+
+    // making the array list
+    this.sentenceList = this.sentenceText.split(' ');
+
+    console.log('sentence list', this.sentenceList);
+
+    if (this.type === 'submit') {
+      this.sentenceMapping(this.entityData.userEntities);
+    }
+
+    if (this.type === 'edit') {
+      this.sentenceMapping(this.entities);
+    }
 
   }
 
+
+  editSentenceMapping(entities) {
+    console.log('entities', entities);
+    // making the object
+    const mappedList = [];
+
+
+    console.log('mapped sentence list', mappedList);
+
+
+    this.sentenceList = mappedList;
+
+
+  }
+  sentenceMapping(entities) {
+
+    console.log('entities', entities);
+    // making the object
+    const mappedList = [];
+
+    if (entities.length > 0) {
+      this.sentenceList.forEach((item, index) => {
+        entities.forEach((i) => {
+
+          console.log('value of item', item);
+          console.log('value of i', i);
+          if (i.value.toLowerCase() === item.toLowerCase()) {
+            console.log('yes it is a match', item);
+            mappedList.push({
+              name: item,
+              value: i.name,
+              color: i.color,
+              end: i.end,
+              start: i.start
+            })
+          } else {
+            mappedList.push({
+              name: item,
+              value: '',
+              color: 'transparent',
+              end: 0,
+              start: 0
+            });
+          }
+        });
+
+      });
+
+
+
+      console.log('mapped sentence list', mappedList);
+
+
+      this.sentenceList = mappedList;
+    } else {
+      this.sentenceList = this.sentenceList.slice().map((word) => {
+        return {
+          name: word,
+          value: '',
+          color: 'transparent',
+          end: 0,
+          start: 0
+        };
+      });
+    }
+
+
+  }
 
   getAllEntities() {
 
     this.observableService.updateSpinnerStatus(true);
     this.dataService.gettingAllEntity().subscribe((response) => {
       console.log('getting the response of the entity', response);
+
+      const entityObject = [];
 
       this.getEntities = response["data"]["userEntities"];
       this.observableService.updateSpinnerStatus(false);
@@ -79,22 +173,19 @@ export class AnalyzeComponent implements OnInit {
 
   subSentence(intent) {
     console.log('intent', intent);
+
+    const entities = this.sentenceList.filter((entity) => {
+      if (entity.color !== 'transparent') {
+        return entity;
+      }
+    });
+
     console.log('intent split', intent.split(':')[1]);
-    const payload =
-    {
+    const payload = {
       _id: this.id,
       updates: {
         intent: intent.split(':')[1],
-        entities:
-          [
-            // {
-            //   name: "light",
-            //   color: "#807308",
-            //   start: 0,
-            //   value: "Master",
-            //   end: 6
-            // }
-          ]
+        entities: entities
       },
       good: false,
       bad: false,
@@ -126,15 +217,27 @@ export class AnalyzeComponent implements OnInit {
     this.closeModel.emit(value);
   }
 
-  onShown(event, ref) {
+  onShown(event, ref, word) {
     console.log('event', event);
-
     ref.show();
 
+    this.mapEntity = word.value;
+    console.log('word fetched', word);
 
   }
 
-
-
-
+  setEntity(word) {
+    console.log('sentence List', this.sentenceList);
+    this.getEntities.forEach((item) => {
+      if (item.name === word.value) {
+        word.color = item.color;
+        console.log('item name', item.name);
+        console.log('word name', word.name);
+        console.log('word value', word.value);
+        console.log('sentence text', this.sentenceText);
+        word.start = this.sentenceText.indexOf(word.name);
+        word.end = word.start + word.name.length;
+      }
+    });
+  }
 }

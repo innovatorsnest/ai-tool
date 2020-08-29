@@ -17,7 +17,7 @@
                         <div class="form-group">
                             <select class="form-control logs--dropdowns" [(ngModel)]="filter.intent" (change)="filterLogs()">
                 <option value="" selected>All Intents</option>
-                <option *ngFor="let intent of getAllIntents" [value]="intent">{{intent}}</option>
+                <option *ngFor="let intent of getIntents" [value]="intent">{{intent}}</option>
               </select>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
             <mat-list-item role="listitem" class="list--item"> </mat-list-item>
             <div class="ai__item">
                 <ng-container *ngFor="let log of allLogs">
-                    <app-item [log]="log" [entities]="allEntities" (refreshLogsStatus)="refreshLogs($event)"></app-item>
+                    <app-item [log]="log" [entities]="log.entities" (refreshLogsStatus)="refreshLogs($event)"></app-item>
                 </ng-container>
             </div>
             <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>

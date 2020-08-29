@@ -1,5 +1,5 @@
 import { ObservablesService } from './services/observable.service';
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectorRef, AfterViewChecked } from "@angular/core";
 import { ServiceFunctionService } from "./service-function.service";
 
 @Component({
@@ -7,13 +7,13 @@ import { ServiceFunctionService } from "./service-function.service";
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"]
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit , AfterViewChecked {
   visible = true;
   selectable = true;
   removable = true;
   addOnBlur = true;
 
-  showSpinner = false;
+  showSpinner;
   trainingSuccess = false;
 
   // input fields
@@ -40,10 +40,16 @@ export class AppComponent implements OnInit {
 
   constructor(
     private serviceFunctionService: ServiceFunctionService,
-    private observablesService: ObservablesService
-    ) {
+    private observablesService: ObservablesService,
+    private cdRef: ChangeDetectorRef
+  ) {
 
-    }
+  }
+
+  ngAfterViewChecked() {
+
+    this.cdRef.detectChanges();
+  }
 
   ngOnInit() {
     this.gettingTrainingLogs();

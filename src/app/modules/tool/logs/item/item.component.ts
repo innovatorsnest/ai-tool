@@ -26,6 +26,8 @@ export class ItemComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    console.log('entites inside the logs', this.log)
   }
 
   makeSuggestion(suggestion, log) {

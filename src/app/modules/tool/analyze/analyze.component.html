@@ -4,11 +4,24 @@
     <h2 class="analyze__title p-l-20">Analyze</h2>
 
     <div class="input--field form-control text__sentence">
-      <ng-container   *ngFor="let word of sentenceText">
+      <ng-container   *ngFor="let word of sentenceList">
 
         <span popperDisableStyle="true" [popper]="tooltipcontent" [popperHideOnMouseLeave]="false" [popperHideOnClickOutside]="false" [popperPlacement]="'bottom-start'"
-          (dblclick)="onShown($event, tooltipcontent)">
-          {{word}}
+          (dblclick)="onShown($event, tooltipcontent, word)">
+          <span *ngIf="word.color !== 'transparent'; else noColor" [ngStyle]="{
+            'background-color': word.color,
+            'color': 'white'
+          }">
+            {{word.name}}
+          </span>
+          <ng-template #noColor>
+            <span [ngStyle]="{
+              'background-color': word.color
+            }">
+              {{word.name}}
+            </span>
+          </ng-template>
+
         </span>
         <popper-content #tooltipcontent>
           <span class="popper popper__design">
@@ -17,9 +30,13 @@
             <div class="popper__design-box">
               <h1 class="popper__design-title">Choose entity</h1>
               <span class="popper__dropdown-area">
-                <select class="form-control" id="sel1" #selectedIntent>
-                  <option *ngFor="let entity of getEntities">
-                    {{entity.name}}</option>
+                <select class="form-control" id="sel1" [(ngModel)]="word.value"  (change)="setEntity(word)">
+                  <ng-container *ngFor="let entity of getEntities">
+                    <option  [value]="entity.name" >
+                      {{entity.name}}
+                     </option>
+                  </ng-container>
+
                 </select>
 
                 <i class="fa fa-trash trash--icon" aria-hidden="true"></i>
@@ -59,12 +76,21 @@
     <div class="col-md-11 message__sentence">
       <p class="edit__sentence">Provide correct interpretation</p>
       <div class="input--field form-control text__sentence">
-        <ng-container *ngFor="let word of sentenceText">
+        <ng-container *ngFor="let word of sentenceList">
 
-          <span [popper]="tooltipcontent" [popperHideOnMouseLeave]="false" [popperHideOnClickOutside]="false" [popperPlacement]="'bottom-start'"
-            (dblclick)="onShown($event, tooltipcontent)">
-            {{word}}
+          <span *ngIf="word.color !== 'transparent'; else noColor" [ngStyle]="{
+            'background-color': word.color,
+            'color': 'white'
+          }">
+            {{word.name}}
           </span>
+          <ng-template #noColor>
+            <span [ngStyle]="{
+              'background-color': word.color
+            }">
+              {{word.name}}
+            </span>
+          </ng-template>
           <popper-content #tooltipcontent>
             <span class="popper popper__design">
               <span class="popper__arrow"></span>

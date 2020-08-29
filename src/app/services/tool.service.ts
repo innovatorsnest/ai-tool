@@ -50,6 +50,15 @@ export class ToolService {
         })
       )
   }
+  gettingAllIntent() {
+    return this._http.get(this.nlpUrl + '/nlpapi/intent/all_intent_names/', this.httpOptions)
+      .pipe(
+        map((res: Response) => {
+          console.log('response from getting all Intents ', res);
+          return res;
+        })
+      );
+  }
   logsUpdate(payload) {
     return this._http.put(this.nlpUrl + '/nlpapi/conversation/logsupdate', payload,  this.httpOptions)
       .pipe(
@@ -59,6 +68,8 @@ export class ToolService {
         })
       )
   }
+
+
 
   allConversationLogs() {
     return this._http.get(this.nlpUrl + '/nlpapi/conversation/logs?intent='+ ''

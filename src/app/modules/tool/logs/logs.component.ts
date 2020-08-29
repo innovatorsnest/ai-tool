@@ -21,7 +21,7 @@ export class LogsComponent implements OnInit {
     'annotated',
     'non_annotated'
   ]
-  getAllIntents: any;
+  getIntents: any;
 
   allMetric = [
     'good',
@@ -38,7 +38,6 @@ export class LogsComponent implements OnInit {
   }
 
 
-  allEntities: Response;
 
 
 
@@ -52,9 +51,19 @@ export class LogsComponent implements OnInit {
 
   ngOnInit() {
 
+    this.getAllIntents();
     this.getAllLogs();
   }
 
+
+  getAllIntents() {
+    this.dataService.gettingAllIntent().subscribe((response) => {
+      console.log('%c gettig the response from all intents','color: yellow',response);
+      this.getIntents = response["data"];
+    }, error => {
+      console.log('error while getting the intents', error);
+    });
+  }
 
   getAllLogs() {
 
@@ -62,12 +71,6 @@ export class LogsComponent implements OnInit {
     this.dataService.allConversationLogs().subscribe((response) => {
       if (response["success"] === true) {
         this.allLogs = response["logs"];
-        if (this.allLogs.length > 0) {
-          this.getAllIntents = this.allLogs.map((log) => {
-            return log.intent;
-          })
-
-        }
         this.observableService.updateSpinnerStatus(false);
       }
 

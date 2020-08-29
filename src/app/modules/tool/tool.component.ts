@@ -17,7 +17,6 @@ export class ToolComponent implements OnInit {
   showLogs = false;
   sentenceData: Response;
   getEntities: any;
-
   sentenceText: string;
 
   constructor(
