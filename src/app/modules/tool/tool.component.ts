@@ -56,6 +56,7 @@ export class ToolComponent implements OnInit {
           this.showAnalysModal = true;
           this.sentenceText = this.sentence;
           this.sentenceData = response;
+          this.showLogs = false;
           this.observableService.updateSpinnerStatus(false);
         },
         error => {
@@ -63,6 +64,10 @@ export class ToolComponent implements OnInit {
         }
       );
     }
+  }
+  closeAnalyzeModel(event) {
+    this.showLogs = true;
+
   }
 
   cancelLogic() {
