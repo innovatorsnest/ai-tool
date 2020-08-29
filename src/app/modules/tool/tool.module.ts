@@ -10,7 +10,7 @@ import { AnalyzeComponent } from './analyze/analyze.component';
 import { FormsModule } from '@angular/forms';
 import { NgxPopper } from 'angular-popper';
 import {NgxPopperModule} from 'ngx-popper';
-
+import { NgxPaginationModule } from "ngx-pagination";
 
 @NgModule({
   declarations: [StatsComponent, LogsComponent, ItemComponent, AnalyzeComponent, PopperDirective],
@@ -19,6 +19,7 @@ import {NgxPopperModule} from 'ngx-popper';
     MaterialModule,
     NgxPopper,
     NgxPopperModule.forRoot({placement: 'bottom'}),
+    NgxPaginationModule,
     FormsModule
   ],
   exports: [StatsComponent,LogsComponent, ItemComponent,AnalyzeComponent],

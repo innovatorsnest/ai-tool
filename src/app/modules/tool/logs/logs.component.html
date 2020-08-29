@@ -63,11 +63,14 @@
             </mat-list-item>
             <mat-list-item role="listitem" class="list--item"> </mat-list-item>
             <div class="ai__item">
-                <ng-container *ngFor="let log of allLogs">
+                <ng-container *ngFor="let log of allLogs  | paginate: { itemsPerPage: 5, currentPage: p }">
                     <app-item [log]="log" [entities]="log.entities" (refreshLogsStatus)="refreshLogs($event)"></app-item>
                 </ng-container>
+
+                <pagination-controls (pageChange)="p = $event"></pagination-controls>
             </div>
-            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+
         </mat-list>
     </mat-card>
 
