@@ -1,6 +1,8 @@
 import { ToolService } from './../../../services/tool.service';
 import { ObservablesService } from './../../../services/observable.service';
 import { Component, OnInit, Input, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
+import { ThrowStmt } from '@angular/compiler';
+import { timeStamp } from 'console';
 
 @Component({
   selector: 'app-analyze',
@@ -73,7 +75,7 @@ export class AnalyzeComponent implements OnInit {
     }
 
     if (this.type === 'edit') {
-      this.sentenceMapping(this.entities);
+      this.editSentenceMapping(this.entities);
     }
 
   }
@@ -83,23 +85,53 @@ export class AnalyzeComponent implements OnInit {
     console.log('entities', entities);
     // making the object
     const mappedList = [];
+    const sentenceListClone = this.sentenceList.slice().map((word) => {
+      return {
+        name: word,
+        value: '',
+        color: 'transparent',
+        end: 0,
+        start: 0
+      };
+    });
 
 
     console.log('mapped sentence list', mappedList);
+    console.log('sentence list', this.sentenceList);
+    console.log('sentence clone', sentenceListClone);
 
+    if (entities.length > 0) {
+      console.log('%c entity exist lets color it', entities);
+      entities.forEach((entity) => {
+        sentenceListClone.forEach((word) => {
+          console.log('entity name', entity.name);
+          console.log('word', word);
+          if (entity.name.toLowerCase() === word.name.toLowerCase()) {
+            word.name = entity.name,
+              word.value = entity.value,
+              word.color = entity.color,
+              word.end = entity.end,
+              word.start = entity.start
+          }
+        });
+      });
+    } else {
+      this.mappingWithoutEntity();
+    }
 
-    this.sentenceList = mappedList;
+    console.log('%c edit mapped list', 'color: yellow', sentenceListClone)
 
-
+    this.sentenceList = sentenceListClone;
   }
   sentenceMapping(entities) {
 
     console.log('entities', entities);
     // making the object
     const mappedList = [];
+    const sentenceListClone = this.sentenceList.slice();
 
     if (entities.length > 0) {
-      this.sentenceList.forEach((item, index) => {
+      sentenceListClone.forEach((item, index) => {
         entities.forEach((i) => {
 
           console.log('value of item', item);
@@ -133,20 +165,23 @@ export class AnalyzeComponent implements OnInit {
 
       this.sentenceList = mappedList;
     } else {
-      this.sentenceList = this.sentenceList.slice().map((word) => {
-        return {
-          name: word,
-          value: '',
-          color: 'transparent',
-          end: 0,
-          start: 0
-        };
-      });
+      this.mappingWithoutEntity();
     }
 
 
   }
 
+  mappingWithoutEntity() {
+    this.sentenceList = this.sentenceList.slice().map((word) => {
+      return {
+        name: word,
+        value: '',
+        color: 'transparent',
+        end: 0,
+        start: 0
+      };
+    });
+  }
   getAllEntities() {
 
     this.observableService.updateSpinnerStatus(true);
