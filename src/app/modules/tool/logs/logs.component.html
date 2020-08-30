@@ -1,78 +1,88 @@
 <div class="row logs">
-    <mat-card class="card logs--card">
-        <span class="text--bold">LOGS</span>
+  <mat-card class="card logs--card">
+    <span class="text--bold">LOGS</span>
 
-        <mat-list role="list">
-            <mat-list-item role="listitem" class="list--item">
-                <div class="row">
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <select class="form-control logs--dropdowns" [(ngModel)]="filter.type" (change)="filterLogs()">
+    <mat-list role="list">
+      <mat-list-item role="listitem" class="list--item">
+        <div class="row">
+          <div class="col-md-2">
+            <div class="form-group">
+              <select class="form-control logs--dropdowns" [(ngModel)]="filter.type" (change)="filterLogs()">
                 <option value="" selected>All Types</option>
                 <option *ngFor="let type of allTypes" [value]="type">{{type}}</option>
               </select>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <select class="form-control logs--dropdowns" [(ngModel)]="filter.intent" (change)="filterLogs()">
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <select class="form-control logs--dropdowns" [(ngModel)]="filter.intent" (change)="filterLogs()">
                 <option value="" selected>All Intents</option>
                 <option *ngFor="let intent of getIntents" [value]="intent">{{intent}}</option>
               </select>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <select class="form-control logs--dropdowns" [(ngModel)]="filter.entity" (change)="filterLogs()">
+            </div>
+          </div>
+          <div class="col-md-2">
+            <!-- <div class="form-group">
+              <select class="form-control logs--dropdowns" [(ngModel)]="filter.entity" (change)="filterLogs()">
                 <option value="" selected>All Entities</option>
-                <option *ngFor="let entity of allEntities" [value]="entity">{{entity}}</option>
+                <option *ngFor="let entity of allEntities" [value]="entity">{{entity.name}}</option>
 
               </select>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <select class="form-control logs--dropdowns" disabled #metric (change)="filterLogs()">
+            </div> -->
+          </div>
+          <div class="col-md-2">
+            <!-- <div class="form-group">
+              <select class="form-control logs--dropdowns" disabled #metric (change)="filterLogs()">
                 <option value="" selected>All Metrics</option>
                 <option *ngFor="let metric of allMetric" [value]="metric">{{metric}}</option>
               </select>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="logs__items">
-                                    Showing <strong>1</strong> out of <strong>1</strong>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="logs__filter-clear" (click)="clearFilters()">
-                                    <span class="material-icons">
+            </div> -->
+          </div>
+          <div class="col-md-4">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="logs__items">
+                  <!-- Showing <strong>1</strong> out of <strong>1</strong> -->
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="logs__filter-clear" (click)="clearFilters()">
+                  <span class="material-icons">
                     cancel
                   </span>
-                                    <p>
-                                        Clear filters
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
+                  <p>
+                    Clear filters
+                  </p>
                 </div>
-            </mat-list-item>
-            <mat-list-item role="listitem" class="list--item"> </mat-list-item>
-            <div class="ai__item">
-                <ng-container *ngFor="let log of allLogs  | paginate: { itemsPerPage: 5, currentPage: p }">
-                    <app-item [log]="log" [entities]="log.entities" (refreshLogsStatus)="refreshLogs($event)"></app-item>
-                </ng-container>
-
-                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+              </div>
             </div>
 
 
-        </mat-list>
-    </mat-card>
+          </div>
+        </div>
+      </mat-list-item>
+      <mat-list-item role="listitem" class="list--item"> </mat-list-item>
+      <div class="ai__item" *ngIf="allLogs?.length > 0; else noLogs">
+        <ng-container *ngFor="let log of allLogs  | paginate: { itemsPerPage: 7, currentPage: page }">
+          <app-item [log]="log" [entities]="log.entities" (refreshLogsStatus)="refreshLogs($event)"></app-item>
+        </ng-container>
+
+        <pagination-controls (pageChange)="page = $event"></pagination-controls>
+      </div>
+
+      <ng-template #noLogs>
+        <div class="ai__item">
+          <div class="data--missing">
+            No Logs
+          </div>
+        </div>
+
+      </ng-template>
+
+
+
+    </mat-list>
+  </mat-card>
 
 
 

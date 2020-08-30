@@ -9,6 +9,7 @@ export class StatsComponent implements OnInit {
 
 
   @Input() isShow : boolean;
+  @Input() stats :any;
   @Output() logsValue = new EventEmitter();
 
   constructor() { }

@@ -4,9 +4,9 @@
   border-radius: 0.5rem;
 }
 
-.train__model-analyze {
-  border-bottom: 1px solid #1e1a2c;
-}
+// .train__model-analyze {
+//   border-bottom: 1px solid #1e1a2c;
+// }
 
 .analyze__title {
   font-size: 1.5rem;
@@ -52,13 +52,16 @@ popper-content {
 .text__sentence {
   height: 3.5rem;
   font-size: 1.3rem;
-  padding: 1rem 2rem;
   border-radius: 0.5rem;
   box-shadow: 0 0 20px 0 rgba(40, 43, 55, 0.2);
   z-index: 10;
   position: relative;
   width: 100%;
   cursor: auto;
+  width: 95%;
+  height: 45px;
+  margin-left: 20px;
+  font-size: 20px;
 }
 
 .input--field {
@@ -148,6 +151,8 @@ popper-content {
 body {
   height: 200vh;
 }
+
+
 
 .popper {
   display: inline-block;

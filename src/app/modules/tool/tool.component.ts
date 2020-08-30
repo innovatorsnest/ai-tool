@@ -18,14 +18,17 @@ export class ToolComponent implements OnInit {
   sentenceData: Response;
   getEntities: any;
   sentenceText: string;
+  stats: Response;
 
   constructor(
     private dataService: ToolService,
     private observableService: ObservablesService,
   ) { }
 
+
   ngOnInit() {
     // this.getAllEntities();
+    this.gettingStats();
   }
 
 
@@ -34,6 +37,17 @@ export class ToolComponent implements OnInit {
     this.showLogs = value;
   }
 
+  gettingStats() {
+    this.observableService.updateSpinnerStatus(true);
+    this.dataService.gettingStatsCount().subscribe((response) => {
+      this.stats = response;
+      this.observableService.updateSpinnerStatus(false);
+
+    }, error => {
+      console.log('error while getting the stats count', error);
+
+    })
+  }
 
   analyzeSentence() {
     console.log("getting the sentence type", typeof(this.sentence));

@@ -9,14 +9,14 @@
         <span popperDisableStyle="true" [popper]="tooltipcontent" [popperHideOnMouseLeave]="false"
           [popperHideOnClickOutside]="false" [popperPlacement]="'bottom-start'"
           (dblclick)="onShown($event, tooltipcontent, word)">
-          <span *ngIf="word.color !== 'transparent'; else noColor" [ngStyle]="{
+          <span class="word--focus" *ngIf="word.color !== 'transparent'; else noColor" [ngStyle]="{
             'background-color': word.color,
             'color': 'white'
           }">
             {{word.value}}
           </span>
           <ng-template #noColor>
-            <span [ngStyle]="{
+            <span class="word--focus" [ngStyle]="{
               'background-color': word.color
             }">
               {{word.value}}
@@ -32,6 +32,7 @@
               <h1 class="popper__design-title">Choose entity</h1>
               <span class="popper__dropdown-area">
                 <select class="form-control" id="sel1" [(ngModel)]="word.name" (change)="setEntity(word)">
+                  <option  [value]="default">--</option>
                   <ng-container *ngFor="let entity of getEntities">
                     <option [value]="entity.name">
                       {{entity.name}}
@@ -40,7 +41,7 @@
 
                 </select>
 
-                <i class="fa fa-trash trash--icon" aria-hidden="true"></i>
+                <i class="fa fa-trash trash--icon" aria-hidden="true" (click)="removeEntity(word);"></i>
               </span>
             </div>
           </span>
@@ -105,6 +106,7 @@
                 <h1 class="popper__design-title">Choose entity</h1>
                 <span class="popper__dropdown-area">
                   <select class="form-control" id="sel1" [(ngModel)]="word.name" (change)="setEntity(word)">
+                    <option [value]="default">--</option>
                     <ng-container *ngFor="let entity of getEntities">
                       <option [value]="entity.name">
                         {{entity.name}}

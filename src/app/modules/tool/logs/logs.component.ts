@@ -12,6 +12,8 @@ import { MatPaginator } from '@angular/material/paginator';
 export class LogsComponent implements OnInit {
   allLogs: any;
 
+  page :any;
+
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
 
@@ -36,6 +38,7 @@ export class LogsComponent implements OnInit {
     entity: "",
     metric: "",
   }
+  allEntities: any;
 
 
 
@@ -52,14 +55,39 @@ export class LogsComponent implements OnInit {
   ngOnInit() {
 
     this.getAllIntents();
+    this.getAllEntities();
     this.getAllLogs();
   }
 
 
+
+  getAllEntities() {
+
+    this.observableService.updateSpinnerStatus(true);
+    this.dataService.gettingAllEntity().subscribe((response) => {
+      console.log('getting the response of the entity', response);
+
+      const entityObject = [];
+
+      this.allEntities = response["data"]["userEntities"];
+      this.observableService.updateSpinnerStatus(false);
+
+    }, (error) => {
+      if (error) {
+        console.log('error inside the getting Entity', error);
+      }
+    });
+  }
+
+
   getAllIntents() {
+    this.observableService.updateSpinnerStatus(true);
+
     this.dataService.gettingAllIntent().subscribe((response) => {
-      console.log('%c gettig the response from all intents','color: yellow',response);
+      console.log('%c gettig the response from all intents', 'color: yellow', response);
       this.getIntents = response["data"];
+      this.observableService.updateSpinnerStatus(false);
+
     }, error => {
       console.log('error while getting the intents', error);
     });
@@ -92,6 +120,7 @@ export class LogsComponent implements OnInit {
       console.log('response while getting the filtering results', response);
       this.allLogs = response["logs"];
       this.observableService.updateSpinnerStatus(false);
+
 
 
     }, error => {

@@ -41,6 +41,17 @@ export class ToolService {
       )
   }
 
+
+
+  gettingStatsCount() {
+    return this._http.get(this.nlpUrl + '/nlpapi/conversation/logscount', this.httpOptions)
+      .pipe(
+        map((res: Response) => {
+          console.log('response fr  om getting ', res);
+          return res;
+        })
+      );
+  }
   gettingAllEntity() {
     return this._http.get(this.nlpUrl + '/nlpapi/entity/all/', this.httpOptions)
       .pipe(

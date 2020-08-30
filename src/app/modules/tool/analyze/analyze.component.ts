@@ -2,6 +2,7 @@ import { ToolService } from './../../../services/tool.service';
 import { ObservablesService } from './../../../services/observable.service';
 import { Component, OnInit, Input, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
 import { conditionallyCreateMapObjectLiteral } from '@angular/compiler/src/render3/view/util';
+import { WrappedNodeExpr } from '@angular/compiler';
 
 @Component({
   selector: 'app-analyze',
@@ -18,6 +19,8 @@ export class AnalyzeComponent implements OnInit {
   @Input() entityData;
   @Output() closeModel = new EventEmitter();
 
+
+  default = '--';
 
 
 
@@ -233,6 +236,11 @@ export class AnalyzeComponent implements OnInit {
     console.log('word fetched', word);
 
 
+  }
+
+  removeEntity(word) {
+    word.name = '--';
+    word.color = 'transparent';
   }
 
   setEntity(word) {
