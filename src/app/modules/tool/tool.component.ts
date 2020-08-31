@@ -50,14 +50,11 @@ export class ToolComponent implements OnInit {
   }
 
   analyzeSentence() {
-    console.log("getting the sentence type", typeof(this.sentence));
+    console.log("getting the sentence type", this.sentence);
+    console.log('show analyze model', this.showAnalysModal);
 
-
-    this.observableService.updateSpinnerStatus(true);
-
-
-
-    if (this.sentence !== undefined) {
+    if (this.sentence !== undefined && this.sentence !== '') {
+      this.observableService.updateSpinnerStatus(true);
 
       const payload = {
         query: this.sentence,
@@ -77,11 +74,14 @@ export class ToolComponent implements OnInit {
           console.log("error while training the response", error);
         }
       );
+    } else {
+      this.observableService.displaySnackbar('Sentence Cannot be empty');
     }
+
   }
   closeAnalyzeModel(event) {
+    this.showAnalysModal = false;
     this.showLogs = true;
-
   }
 
   cancelLogic() {
